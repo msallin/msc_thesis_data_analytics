@@ -1,20 +1,23 @@
 
 get_daily <- function(daily_sheet) {
+
+    names <- get_data_column_names()
+
     daily_sheet_new <- as.data.frame(daily_sheet)
     colnames(daily_sheet_new)[2] <- "date"
-    colnames(daily_sheet_new)[6] <- "productivity"
-    colnames(daily_sheet_new)[7] <- "stress"
-    colnames(daily_sheet_new)[8] <- "rework"
-    colnames(daily_sheet_new)[9] <- "manual"
-    colnames(daily_sheet_new)[10] <- "delay_missing_automation"
-    colnames(daily_sheet_new)[11] <- "communication"
-    colnames(daily_sheet_new)[12] <- "administrative_demands"
-    colnames(daily_sheet_new)[13] <- "administrative_demands_delay"
-    colnames(daily_sheet_new)[14] <- "other_duties"
-    colnames(daily_sheet_new)[15] <- "customer"
-    colnames(daily_sheet_new)[16] <- "cognitive_load"
-    colnames(daily_sheet_new)[17] <- "complex_solution"
-    colnames(daily_sheet_new)[18] <- "knowledge"
+    colnames(daily_sheet_new)[6] <- names[1]
+    colnames(daily_sheet_new)[7] <- names[2]
+    colnames(daily_sheet_new)[8] <- names[3]
+    colnames(daily_sheet_new)[9] <- names[4]
+    colnames(daily_sheet_new)[10] <- names[5]
+    colnames(daily_sheet_new)[11] <- names[6]
+    colnames(daily_sheet_new)[12] <- names[7]
+    colnames(daily_sheet_new)[13] <- names[8]
+    colnames(daily_sheet_new)[14] <- names[9]
+    colnames(daily_sheet_new)[15] <- names[10]
+    colnames(daily_sheet_new)[16] <- names[11]
+    colnames(daily_sheet_new)[17] <- names[12]
+    colnames(daily_sheet_new)[18] <- names[13]
     colnames(daily_sheet_new)[19] <- "stress_cause"
     colnames(daily_sheet_new)[20] <- "main_waste_cause"
     colnames(daily_sheet_new)[21] <- "not_reported"
@@ -49,7 +52,7 @@ get_daily <- function(daily_sheet) {
         "Up to a month" = 6,
         "Multiple months" = 7
     )
-    daily_sheet_new$delay_missing_automation <- delay_recode[daily_sheet_new$delay_missing_automation]
+    daily_sheet_new$missing_automation_delay <- delay_recode[daily_sheet_new$missing_automation_delay]
     daily_sheet_new$administrative_demands_delay <- delay_recode[daily_sheet_new$administrative_demands_delay]
 
 
@@ -67,4 +70,9 @@ get_daily <- function(daily_sheet) {
     daily_sheet_new$calendarWeek <- strftime(daily_sheet_new$date, format = "%V")
 
     return(daily_sheet_new)
+}
+
+get_data_column_names <- function() {
+    n <- c("productivity", "stress", "rework", "manual", "missing_automation_delay", "communication", "administrative_demands", "administrative_demands_delay", "other_duties", "customer", "cognitive_load", "complex_solution", "knowledge")
+    return(n)
 }

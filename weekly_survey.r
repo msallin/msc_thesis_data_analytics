@@ -6,7 +6,7 @@ get_weekly <- function(weekly_sheet) {
     colnames(weekly_sheet_new)[7] <- "stress"
     colnames(weekly_sheet_new)[8] <- "rework"
     colnames(weekly_sheet_new)[9] <- "manual"
-    colnames(weekly_sheet_new)[10] <- "delay_missing_automation"
+    colnames(weekly_sheet_new)[10] <- "missing_automation_delay"
     colnames(weekly_sheet_new)[11] <- "communication"
     colnames(weekly_sheet_new)[12] <- "administrative_demands"
     colnames(weekly_sheet_new)[13] <- "administrative_demands_delay"
