@@ -19,11 +19,9 @@ generate_feedback_likert_plots <- function(tool_feedback) {
     feedback_likert_one <- likert(tool_feedback[, likert_one])
     feedback_likert_two <- likert(tool_feedback[, likert_two])
 
-    plot_to_file_start("likert_one")
-    plot(feedback_likert_one)
-    plot_to_file_end()
+    likert_one <- plot(feedback_likert_one)
+    ggsave(plot = likert_one, "results/likert_one.pdf", device = "pdf")
 
-    plot_to_file_start("likert_two")
-    plot(feedback_likert_two)
-    plot_to_file_end()
+    likert_two <- plot(feedback_likert_two)
+    ggsave(plot = likert_two, "results/likert_two.pdf", device = "pdf")
 }

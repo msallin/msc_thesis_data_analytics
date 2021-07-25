@@ -2,6 +2,33 @@
 # RQ2: How accurate is self-reporting daily vs. weekly?
 # ***********************************************************
 
+# Spearman's correlation measures the strength and direction of monotonic association between two variables.
+# R: 1.0 (a perfect positive correlation) and -1.0 (a perfect negative correlation). 
+# An Rs of 0 indicates no association between ranks.
+# H0: No correlation, H1: Correlation
+generate_daily_weekly_correlation <- function(daily, weekly) {
+   aggregated_data <- interval_analysis_data_prep(daily, weekly)
+   column_names <- get_data_column_names()
+
+   p <- list()
+   for (column_name in column_names) {
+      one_type_column <- c("weekly_" %&% column_name, "daily_" %&% column_name)
+      one_type <- aggregated_data[, one_type_column]
+      names(one_type)[1] <- "weekly"
+      names(one_type)[2] <- "daily"
+      p[[column_name]] <- ggscatter(
+         one_type,
+         x = "weekly", y = "daily",
+         add = "reg.line", conf.int = TRUE,
+         cor.coef = TRUE, cor.method = "spearman",
+         xlab = FALSE, ylab = FALSE, title = column_name
+      )
+      p[[column_name]] <- p[[column_name]] + rremove("x.text") + rremove("y.text")
+   }
+
+   plots <- ggarrange(plotlist = p)
+   ggsave("results/daily_weekly_correlation.pdf", device = "pdf")
+}
 
 generate_daily_weekly_difference_boxplots <- function(daily, weekly) {
    aggregated_data <- interval_analysis_data_prep(daily, weekly)
