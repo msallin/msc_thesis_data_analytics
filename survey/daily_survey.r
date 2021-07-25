@@ -1,7 +1,6 @@
-
 get_daily <- function(daily_sheet) {
 
-    names <- get_data_column_names()
+    names <- c("productivity", "stress", "rework", "manual", "missing_automation_delay", "communication", "administrative_demands", "administrative_demands_delay", "other_duties", "customer", "cognitive_load", "complex_solution", "knowledge")
 
     daily_sheet_new <- as.data.frame(daily_sheet)
     colnames(daily_sheet_new)[2] <- "date"
@@ -70,9 +69,4 @@ get_daily <- function(daily_sheet) {
     daily_sheet_new$calendarWeek <- strftime(daily_sheet_new$date, format = "%V")
 
     return(daily_sheet_new)
-}
-
-get_data_column_names <- function() {
-    n <- c("productivity", "stress", "rework", "manual", "missing_automation_delay", "communication", "administrative_demands", "administrative_demands_delay", "other_duties", "customer", "cognitive_load", "complex_solution", "knowledge")
-    return(n)
 }

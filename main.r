@@ -1,60 +1,40 @@
 # update.packages(ask = FALSE)
-# install.packages("readxl")
-# install.packages("dplyr")
+if (!require(readxl)) install.packages("readxl")
+if (!require(dplyr)) install.packages("dplyr")
+if (!require(psych)) install.packages("psych")
+if (!require(likert)) install.packages("likert")
+if (!require(plyr)) install.packages("plyr")
 
 library("dplyr")
 library("readxl")
+library("likert")
+library("plyr")
 
-source("utility.r")
-source("final_survey.r")
-source("daily_survey.r")
-source("weekly_survey.r")
-source("reporting_interval_analysis.r")
+source("misc/utility.r")
+source("misc/metadata.r")
+source("survey/final_survey.r")
+source("survey/daily_survey.r")
+source("survey/weekly_survey.r")
+source("survey/load_all.r")
+source("analysis/rqx_reporting_interval_analysis.r")
+source("analysis/descriptive_stats.r")
+source("analysis/rq1_tool_feedback.r")
+source("analysis/rq2_xy.r")
+source("analysis/rq3_xy.r")
 
-load_data <- function() {
-    result_file <- "C:\\Users\\marcs\\OneDrive\\Documents\\School\\6 - FHNW MSc Engineering\\Project 9 Thesis\\results.xlsx" # file.choose()
-    daily_sheet <- read_excel(result_file, sheet = "Daily Survey")
-    weekly_sheet <- read_excel(result_file, sheet = "Weekly Survey")
-    final_sheet <- read_excel(result_file, sheet = "Final Survey")
-
-    daily <<- get_daily(daily_sheet)
-    weekly <<- get_weekly(weekly_sheet)
-
-    fkm <<- get_fkm(final_sheet)
-}
-
+# Load all the data from excel.
+# This will populate some global variables:
+# daily, weekly, fkm, final, tool_feedback
 load_data()
 
-# ***********************************************************
-# RQ1: How can a self-reporting tool help to identify waste?
-# ***********************************************************
-# TODO
+# Descriptive Stats
+generate_descriptive_statistics(daily)
 
-aggregated_data <- interval_analysis_data_prep(daily, weekly)
+# RQ1
+generate_feedback_likert_plots(tool_feedback)
 
-# ***********************************************************
-# RQ2: How accurate is self-reporting daily vs. weekly?
-# ***********************************************************
-column_names <- get_data_column_names()
-results <- calculate_weekly_daily_difference(aggregated_data, column_names)
-print_weekly_daily_difference_overview(results, column_names)
+# RQ2
+generate_daily_weekly_difference_boxplots(daily, weekly)
 
-# Generate histogram of different waste types
-# hist(unlist(results["rework"], use.names = FALSE))
-
-# Generate boxplot for each waste type
-# par(mfrow = c(4, 4)) # Create a 4 x 4 plotting matrix
-# for (i in seq_len(length(results))) {
-#     name <- names(results[i])
-# 1. Open jpeg file
-# jpeg("RQ3/" %&% name %&% ".jpg", width = 350, height = 350)
-# 2. Create the plot
-# boxplot(results[i], main = name, notch = FALSE)
-# 3. Close the file
-# dev.off()
-# }
-
-# ***********************************************************
-# RQ3: Is there a systematic bias when self-reporting weekly?
-# ***********************************************************
-interval_analysis_lm(aggregated_data)
+# RQ3
+generate_interval_analysis_lm(daily, weekly)

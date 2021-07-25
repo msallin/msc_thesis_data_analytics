@@ -1,4 +1,23 @@
 get_fkm <- function(final) {
+    final_new <- get_final(final)
+    fkm_columns <- c(9, 10, 11, 12, 21)
+    fkm <- final_new[fkm_columns]
+    fkm$fkm_score <- fkm$change_failure_rate + fkm$time_to_restore + fkm$leadtime + fkm$deployment_frequency
+    return(fkm)
+}
+
+get_tool_feedback <- function(final) {
+    final_new <- get_final(final)
+    tool_feedback_columns <- c(13, 14, 15, 16, 17, 18, 19)
+    tool_feedback <- final_new[tool_feedback_columns]
+    # For some reasons the excel contains \r\n...
+    cols_to_be_rectified <- names(tool_feedback)[vapply(tool_feedback, is.character, logical(1))]
+    tool_feedback[, cols_to_be_rectified] <- lapply(tool_feedback[, cols_to_be_rectified], trimws)
+    tool_feedback[, ] <- lapply(tool_feedback[, ], factor, levels = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))
+    return(tool_feedback)
+}
+
+get_final <- function(final) {
     final_new <- as.data.frame(final)
     colnames(final_new)[6] <- "dropout"
     colnames(final_new)[7] <- "not_working"
@@ -17,11 +36,6 @@ get_fkm <- function(final) {
     colnames(final_new)[20] <- "interest_in_report"
     colnames(final_new)[21] <- "id"
 
-    metadata_columns <- c(6, 7, 8, 21)
-    fkm_columns <- c(9, 10, 11, 12, 21)
-    metadata <- final_new[metadata_columns]
-    fkm <- final_new[fkm_columns]
-
     df_recode <- c(
         "I don't know / NA" = 0,
         "Between once per month and once every 6 months" = 1,
@@ -30,7 +44,7 @@ get_fkm <- function(final) {
         "Between once per hour and once per day" = 4,
         "On demand (multiple deploys per day)" = 5
     )
-    fkm$deployment_frequency <- df_recode[fkm$deployment_frequency]
+    final_new$deployment_frequency <- df_recode[final_new$deployment_frequency]
 
     ttr_lt_recode <- c(
         "I don't know / NA" = 0,
@@ -41,8 +55,8 @@ get_fkm <- function(final) {
         "Less than one day" = 5,
         "Less than one hour" = 6
     )
-    fkm$leadtime <- ttr_lt_recode[fkm$leadtime]
-    fkm$time_to_restore <- ttr_lt_recode[fkm$time_to_restore]
+    final_new$leadtime <- ttr_lt_recode[final_new$leadtime]
+    final_new$time_to_restore <- ttr_lt_recode[final_new$time_to_restore]
 
     cfr_recode <- c(
         "I don't know / NA" = 0,
@@ -53,8 +67,7 @@ get_fkm <- function(final) {
         "61-75%" = 2,
         "76-100%" = 1
     )
-    fkm$change_failure_rate <- cfr_recode[fkm$change_failure_rate]
+    final_new$change_failure_rate <- cfr_recode[final_new$change_failure_rate]
 
-    fkm$fkm_score <- fkm$change_failure_rate + fkm$time_to_restore + fkm$leadtime + fkm$deployment_frequency
-    return(fkm)
+    return(final_new)
 }
