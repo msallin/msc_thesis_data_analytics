@@ -1,6 +1,7 @@
 
 get_weekly <- function(weekly_sheet) {
     weekly_sheet_new <- as.data.frame(weekly_sheet)
+    colnames(weekly_sheet_new)[1] <- "record_id"
     colnames(weekly_sheet_new)[2] <- "date"
     colnames(weekly_sheet_new)[6] <- "productivity"
     colnames(weekly_sheet_new)[7] <- "stress"

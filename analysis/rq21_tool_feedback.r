@@ -1,5 +1,7 @@
 # ***********************************************************
-# RQ1: How can a self-reporting tool help to identify waste?
+# RQ2.1: How can a self-reporting tool help to identify waste?
+# ***********************************************************
+# TODO: Describe file
 # ***********************************************************
 
 generate_feedback_likert_plots <- function(tool_feedback) {
@@ -24,4 +26,6 @@ generate_feedback_likert_plots <- function(tool_feedback) {
 
     likert_two <- plot(feedback_likert_two)
     ggsave(plot = likert_two, "results/likert_two.pdf", device = "pdf")
+
+    # TODO: What waste coulnd't be reported?
 }

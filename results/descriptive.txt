@@ -1,10 +1,10 @@
-Daily reportings: 135
-Weekly reportings: 12
-1. rework(1.26666666666667)
-2. other_duties(1.02962962962963)
-3. knowledge(0.940740740740741)
-4. administrative_demands(0.8)
-5. cognitive_load(0.777777777777778)
-6. manual(0.748148148148148)
-7. communication(0.703703703703704)
-8. complex_solution(0.562962962962963)
+Daily reportings: 159
+Weekly reportings: 31
+1. rework(1.17610062893082)
+2. other_duties(0.955974842767296)
+3. knowledge(0.911949685534591)
+4. administrative_demands(0.754716981132076)
+5. cognitive_load(0.748427672955975)
+6. manual(0.70440251572327)
+7. communication(0.672955974842767)
+8. complex_solution(0.540880503144654)

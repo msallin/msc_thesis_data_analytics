@@ -19,6 +19,7 @@ get_tool_feedback <- function(final) {
 
 get_final <- function(final) {
     final_new <- as.data.frame(final)
+    colnames(final_new)[1] <- "record_id"
     colnames(final_new)[6] <- "dropout"
     colnames(final_new)[7] <- "not_working"
     colnames(final_new)[8] <- "skipped_weeks"

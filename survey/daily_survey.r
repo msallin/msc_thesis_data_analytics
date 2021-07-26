@@ -3,6 +3,7 @@ get_daily <- function(daily_sheet) {
     names <- c("productivity", "stress", "rework", "manual", "missing_automation_delay", "communication", "administrative_demands", "administrative_demands_delay", "other_duties", "customer", "cognitive_load", "complex_solution", "knowledge")
 
     daily_sheet_new <- as.data.frame(daily_sheet)
+    colnames(daily_sheet_new)[1] <- "record_id"
     colnames(daily_sheet_new)[2] <- "date"
     colnames(daily_sheet_new)[6] <- names[1]
     colnames(daily_sheet_new)[7] <- names[2]
@@ -24,7 +25,7 @@ get_daily <- function(daily_sheet) {
 
     duration_recode <- c(
         "0h" = 0,
-        "0" = 0,
+        "0" = 0, # Error in survey which was corrected during the study.
         "<1h" = 1,
         "1-2h" = 2,
         "2-4h" = 3,
@@ -53,7 +54,6 @@ get_daily <- function(daily_sheet) {
     )
     daily_sheet_new$missing_automation_delay <- delay_recode[daily_sheet_new$missing_automation_delay]
     daily_sheet_new$administrative_demands_delay <- delay_recode[daily_sheet_new$administrative_demands_delay]
-
 
     customer_recode <- c(
         "N/A" = 0,

@@ -1,9 +1,10 @@
 # ***********************************************************
-# RQ3: Is there a systematic bias when self-reporting weekly?
+# RQ2.3: Is there a systematic bias when self-reporting weekly?
+# ***********************************************************
+# TODO: Describe file
 # ***********************************************************
 
 generate_interval_analysis_lm <- function(daily, weekly) {
-   # pairs(daily_time_waste ~ weekly_time_waste, data = week_aggreations, main = "Simple Scatterplot Matrix")
    week_aggreations <- interval_analysis_data_prep(daily, weekly)
    model <- lm(daily_time_waste ~ weekly_time_waste, data = week_aggreations)
    newx <- seq(min(week_aggreations$weekly_time_waste), max(week_aggreations$weekly_time_waste), by = 0.05)

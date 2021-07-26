@@ -1,6 +1,7 @@
-
 # ***********************************************************
 # Participant Report:
+# ***********************************************************
+# TODO: Describe file
 # 1. How much waste did you experience?
 # 2. How much delay did you experience?
 # 3. What was your averge stress score?
@@ -9,6 +10,7 @@
 # 6. Does your feeling of stress correlate with waste experienced?
 # - What caused you the most waste?
 # ***********************************************************
+
 bla <- function(daily) {
     participant <- subset(daily, id == "ce1ce7e7-07ef-413c-adec-64378049a128")
 

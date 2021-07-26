@@ -1,11 +1,14 @@
+# TODO-List
+# 1. Clean up data
+# 1.1 Has a participant filled out the daily or weekly two times? If yes, take the latest
+# 1.2 Exclude weeks which were not reported fully
+# 2. Finish descriptive statistics (include cleanup stuff into this)
+# 3. Finish rq1 (beatufiy graphics etc)
+
 # update.packages(ask = FALSE)
 if (!require(readxl)) install.packages("readxl") # survey (excel) reading
-# if (!require(dplyr)) install.packages("dplyr") # survey (excel) reading
-if (!require(psych)) install.packages("psych") # likert visualization
 if (!require(likert)) install.packages("likert") # likert visualization
-# if (!require(plyr)) install.packages("plyr")
 if (!require(ggpubr)) install.packages("ggpubr") # ggscatter
-
 
 library("readxl")
 library("likert")
@@ -19,9 +22,10 @@ source("survey/weekly_survey.r")
 source("survey/load_all.r")
 source("analysis/rqx_reporting_interval_analysis.r")
 source("analysis/descriptive_stats.r")
-source("analysis/rq1_tool_feedback.r")
-source("analysis/rq2_accuracy.r")
-source("analysis/rq3_bias.r")
+source("analysis/rq21_tool_feedback.r")
+source("analysis/rq22_accuracy.r")
+source("analysis/rq23_bias.r")
+source("analysis/rq3_fkm_waste.r")
 
 # Load all the data from excel.
 # This will populate some global variables:
@@ -29,14 +33,12 @@ source("analysis/rq3_bias.r")
 load_data()
 
 # Descriptive Stats
-generate_descriptive_statistics(daily)
+generate_descriptive_statistics(daily, weekly)
 
-# RQ1
-generate_feedback_likert_plots(tool_feedback)
-
-# RQ2: How accurate is self-reporting daily vs. weekly?
-generate_daily_weekly_difference_boxplots(daily, weekly)
-generate_daily_weekly_correlation(daily, weekly)
+# RQ2
+generate_feedback_likert_plots(tool_feedback) # 2.1
+generate_daily_weekly_correlation(daily, weekly) # 2.2
+generate_daily_weekly_difference_boxplots(daily, weekly) # 2.3
 
 # RQ3
-generate_interval_analysis_lm(daily, weekly)
+generate_regression_fkm_waste(daily, weekly)
