@@ -3,13 +3,18 @@
 # 1.1 Has a participant filled out the daily or weekly two times? If yes, take the latest
 # 1.2 Exclude weeks which were not reported fully
 # 2. Finish descriptive statistics (include cleanup stuff into this)
-# 3. Finish rq1 (beatufiy graphics etc)
 
 # update.packages(ask = FALSE)
 if (!require(readxl)) install.packages("readxl") # survey (excel) reading
 if (!require(likert)) install.packages("likert") # likert visualization
 if (!require(ggpubr)) install.packages("ggpubr") # ggscatter
+if (!require(tm))install.packages("tm")  # for text mining
+if (!require(wordcloud)) install.packages("wordcloud") # word-cloud generator 
+if (!require(RColorBrewer)) install.packages("RColorBrewer") # color palettes
 
+library("tm")
+# library("wordcloud")
+# library("RColorBrewer")
 library("readxl")
 library("likert")
 library("ggpubr")
@@ -37,8 +42,9 @@ generate_descriptive_statistics(daily, weekly)
 
 # RQ2
 generate_feedback_likert_plots(tool_feedback) # 2.1
+generate_not_reported_waste_summary(daily) # 2.1
 generate_daily_weekly_correlation(daily, weekly) # 2.2
 generate_daily_weekly_difference_boxplots(daily, weekly) # 2.3
 
 # RQ3
-generate_regression_fkm_waste(daily, weekly)
+generate_regression_fkm_waste(daily, fkm)

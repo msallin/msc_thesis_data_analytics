@@ -1,7 +1,8 @@
-analysis_something <- function(daily, fkm) {
+generate_regression_fkm_waste <- function(daily, fkm) {
     filtered_fkm <- subset(fkm, fkm_score > 0)
 
     op <- par(mfrow = c(2, 2))
+
     delay_columns <- daily[, c("id", get_waste_delay_data_column_names())]
     aggregated_delay <- aggregate(. ~ id, delay_columns, sum)
     fit_lm(filtered_fkm, aggregated_delay, "Delay")
@@ -17,6 +18,8 @@ analysis_something <- function(daily, fkm) {
     productivity_column <- daily[, c("id", "productivity")]
     aggregated_productivity <- aggregate(. ~ id, productivity_column, sum)
     fit_lm(filtered_fkm, aggregated_productivity, "Productivity")
+
+    par(op)
 }
 
 fit_lm <- function(fkm, waste, title) {

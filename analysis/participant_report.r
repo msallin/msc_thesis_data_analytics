@@ -8,7 +8,7 @@
 # 4. What was your average productivity score?
 # 5. Does your feeling of productivity correlate with waste experienced?
 # 6. Does your feeling of stress correlate with waste experienced?
-# - What caused you the most waste?
+# 7. What caused you the most waste?
 # ***********************************************************
 
 bla <- function(daily) {

@@ -4,6 +4,13 @@ plot_to_file_start <- function(file_name) {
     return(file_name)
 }
 
+writeLine <- function(text, file_path, emptyLine = FALSE) {
+    if(emptyLine) {
+        write("", file_path, append = TRUE)
+    }
+    write(text, file_path, append = TRUE)
+}
+
 plot_to_file_end <- function() dev.off()
 
 recreate_results_file <- function(file_name) {
