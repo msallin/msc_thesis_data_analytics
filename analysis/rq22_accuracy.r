@@ -43,10 +43,19 @@ calculate_weekly_daily_difference <- function(aggregated_data, column_names) {
    results <- list()
    for (name in get_data_column_names()) {
       columns <- c("weekly_" %&% name, "daily_" %&% name)
-      one_waste_category <- aggregated_data[, columns]
+      one_type <- aggregated_data[, columns]
+      names(one_type) <- c("daily", "weekly")
+      one_type$mean <- (one_type$daily + one_type$weekly) / 2
+      one_type$difference <- one_type$daily - one_type$weekly
+      one_type$percentage_difference <- (one_type$difference / one_type$mean) * 100
 
-      # Daily - Weekly
-      results[name] <- one_waste_category[1] - one_waste_category[2]
+      # TODO: Write to file
+      mean(one_type$difference)
+      mean(one_type$percentage_difference)
+      sd(one_type$difference)
+      sd(one_type$percentage_difference)
+
+      results[name] <- one_type["difference"]
    }
 
    return(results)

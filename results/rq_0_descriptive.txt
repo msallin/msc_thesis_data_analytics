@@ -24,24 +24,24 @@
 
 6. What caused the most stress?
 deadline
+meeting
 meetings
 nothing
-meeting
 work
 sprint
-today
-tasks
-project
+coworker
+last
 many
+missing
 
 7. What caused the most waste?
 meetings
 technical
 meeting
 work
-missing
 debt
-lot
 focus
-pipeline
+lot
+missing
 dept
+documentation

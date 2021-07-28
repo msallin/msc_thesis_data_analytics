@@ -9,8 +9,7 @@ if (!require(readxl)) install.packages("readxl") # survey (excel) reading
 if (!require(likert)) install.packages("likert") # likert visualization
 if (!require(ggpubr)) install.packages("ggpubr") # ggscatter
 if (!require(tm))install.packages("tm")  # for text mining
-if (!require(wordcloud)) install.packages("wordcloud") # word-cloud generator 
-if (!require(RColorBrewer)) install.packages("RColorBrewer") # color palettes
+if (!require(BlandAltmanLeh))install.packages("BlandAltmanLeh")  # for comparison of daily and weekly surveys
 #if (!require(wordcloud)) install.packages("wordcloud") # word-cloud generator 
 #if (!require(RColorBrewer)) install.packages("RColorBrewer") # color palettes
 
@@ -20,6 +19,8 @@ library("tm")
 library("readxl")
 library("likert")
 library("ggpubr")
+library("BlandAltmanLeh")
+
 
 source("misc/utility.r")
 source("misc/metadata.r")
@@ -47,6 +48,7 @@ generate_feedback_likert_plots(tool_feedback) # 2.1
 generate_not_reported_waste_summary(daily) # 2.1
 generate_daily_weekly_correlation(daily, weekly) # 2.2
 generate_daily_weekly_difference_boxplots(daily, weekly) # 2.3
+generate_daily_weekly_bias(daily, weekly) # 2.3
 
 # RQ3
 generate_regression_fkm_waste(daily, fkm)

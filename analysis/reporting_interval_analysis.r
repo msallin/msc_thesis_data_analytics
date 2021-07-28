@@ -24,15 +24,15 @@ interval_analysis_data_prep <- function(daily, weekly) {
          
          # The factors used represent timespans and hence calculating the mean is possible.
          # It is the same as taking the mean amount of hours represented in a span, sum and average this.
-         daily_rework <- mean(recode_daily_factor_to_mean(daily_participant$rework))
-         daily_rework <- mean(recode_daily_factor_to_mean(daily_participant$rework))
-         daily_manual <- mean(recode_daily_factor_to_mean(daily_participant$manual))
-         daily_communication <- mean(recode_daily_factor_to_mean(daily_participant$communication))
-         daily_administrative_demands <- mean(recode_daily_factor_to_mean(daily_participant$administrative_demands))
-         daily_other_duties <- mean(recode_daily_factor_to_mean(daily_participant$other_duties))
-         daily_knowledge <- mean(recode_daily_factor_to_mean(daily_participant$knowledge))
-         daily_cognitive_load <- mean(recode_daily_factor_to_mean(daily_participant$cognitive_load))
-         daily_complex_solution <- mean(recode_daily_factor_to_mean(daily_participant$complex_solution))
+         daily_rework <- sum(recode_daily_factor_to_mean(daily_participant$rework))
+         daily_rework <- sum(recode_daily_factor_to_mean(daily_participant$rework))
+         daily_manual <- sum(recode_daily_factor_to_mean(daily_participant$manual))
+         daily_communication <- sum(recode_daily_factor_to_mean(daily_participant$communication))
+         daily_administrative_demands <- sum(recode_daily_factor_to_mean(daily_participant$administrative_demands))
+         daily_other_duties <- sum(recode_daily_factor_to_mean(daily_participant$other_duties))
+         daily_knowledge <- sum(recode_daily_factor_to_mean(daily_participant$knowledge))
+         daily_cognitive_load <- sum(recode_daily_factor_to_mean(daily_participant$cognitive_load))
+         daily_complex_solution <- sum(recode_daily_factor_to_mean(daily_participant$complex_solution))
          
          daily_customer <- mean(daily_participant$customer)
 
@@ -121,7 +121,8 @@ recode_daily_factor_to_mean <- function(x) {
 }
 
 recode_weekly_duration <- function(weekly_reporting, number_of_days_reported) {
-   x <- weekly_reporting/number_of_days_reported
+   return(weekly_reporting)
+   # x <- weekly_reporting/number_of_days_reported
    return(x)
    # if(x == 0) return(0)
    # if(x < 1) return(1)

@@ -4,35 +4,32 @@
 # TODO: Describe file
 # ***********************************************************
 
-generate_interval_analysis_lm <- function(daily, weekly) {
-   week_aggreations <- interval_analysis_data_prep(daily, weekly)
-   model <- lm(daily_time_waste ~ weekly_time_waste, data = week_aggreations)
-   newx <- seq(min(week_aggreations$weekly_time_waste), max(week_aggreations$weekly_time_waste), by = 0.05)
-   conf_interval <- predict(model,
-      newdata = data.frame(weekly_time_waste = newx), interval = "confidence",
-      level = 0.95
-   )
-   summary(model)
+generate_daily_weekly_bias <- function(daily, weekly) {
+   aggregated_data <- interval_analysis_data_prep(daily, weekly)
 
-   plot_to_file_start("rq_2_3_weekly_daily_lm")
+   plot_to_file_start("rq_2_3_bias_bland_altman")
+   op <- par(mfrow = c(3, 3))
 
-   plot(daily_time_waste ~ weekly_time_waste,
-      data = week_aggreations, col = "grey", pch = 20, cex = 1.5,
-      main = "Weekly Aggregated vs Reported"
-   )
-   abline(model, col = "red", lwd = 2)
-   matlines(newx, conf_interval[, 2:3], col = "blue", lty = 2)
-
-   plot_to_file_end()
-
-   plot_to_file_start("rq_2_3_weekly_daily_lm_residuals")
-
-   op <- par(mfrow = c(2, 2))
-   for (i in 1:4) {
-      plot(model, which = i)
+   for (column_name in get_waste_time_spent_column_names()) {
+      one_type_column <- c("daily_" %&% column_name, "weekly_" %&% column_name)
+      one_type <- aggregated_data[, one_type_column]
+      names(one_type) <- c("daily", "weekly")
+      print_bland_altman_plots(one_type, column_name)
    }
 
    par(op)
-
    plot_to_file_end()
+}
+
+# https://www-users.york.ac.uk/~mb55/meas/ba.htm - original
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4470095/ - Understanding Bland Altman analysis
+# https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Bland-Altman_Plot_and_Analysis.pdf
+# https://cran.r-project.org/web/packages/BlandAltmanLeh/vignettes/Intro.html
+print_bland_altman_plots <- function(measurements, title) {
+   A <- measurements[,1] # daily (gold standard)
+   B <- measurements[,2] # weekly (estimate)
+   stats <- bland.altman.stats(A, B)
+   bland.altman.plot(A, B,
+      main=title, xlab="Means", ylab="Differences")
+      # Maybe add , conf.int=.95, pch=19
 }
