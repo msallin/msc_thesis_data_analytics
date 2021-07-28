@@ -65,7 +65,7 @@ word_frequency <- function(input) {
     splitted_input <- unlist(strsplit(input, split = ","))
     splitted_input <- unlist(strsplit(splitted_input, split = ";"))
 
-    docs <- Corpus(VectorSource(splitted_input))
+    docs <- VCorpus(VectorSource(splitted_input))
     docs <- tm_map(docs, content_transformer(tolower))
     docs <- tm_map(docs, removeNumbers)
     docs <- tm_map(docs, removeWords, stopwords("english"))

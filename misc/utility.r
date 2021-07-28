@@ -11,7 +11,9 @@ writeLine <- function(text, file_path, emptyLine = FALSE) {
     write(text, file_path, append = TRUE)
 }
 
-plot_to_file_end <- function() dev.off()
+plot_to_file_end <- function() {
+    garbage <- dev.off()
+}
 
 recreate_results_file <- function(file_name) {
     file_name <- "results/" %&% file_name

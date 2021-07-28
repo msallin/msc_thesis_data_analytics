@@ -20,17 +20,16 @@ generate_daily_weekly_correlation <- function(daily, weekly) {
       names(one_type)[2] <- "daily"
       plot <- ggscatter(
          one_type,
-         x = "weekly", y = "daily",
-         add = "reg.line", conf.int = TRUE,
+         x = "weekly", y = "daily", conf.int = TRUE,
          cor.coef = TRUE, cor.method = "spearman",
          xlab = FALSE, ylab = FALSE, title = column_name,
          size=1
-      )
+      ) + geom_smooth(formula = y ~ x, method = "lm")
       plots[[column_name]] <- plot + rremove("x.text") + rremove("y.text")
    }
 
    arranged_plot <- ggarrange(plotlist = plots)
-   ggsave(plot = arranged_plot, "results/rq_2_2_daily_weekly_correlation.pdf", device = "pdf")
+   suppressMessages(ggsave(plot = arranged_plot, "results/rq_2_2_daily_weekly_correlation.pdf", device = "pdf"))
 }
 
 generate_daily_weekly_difference_boxplots <- function(daily, weekly) {
