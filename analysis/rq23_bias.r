@@ -14,7 +14,7 @@ generate_interval_analysis_lm <- function(daily, weekly) {
    )
    summary(model)
 
-   plot_to_file_start("weekly_daily_lm")
+   plot_to_file_start("rq_2_3_weekly_daily_lm")
 
    plot(daily_time_waste ~ weekly_time_waste,
       data = week_aggreations, col = "grey", pch = 20, cex = 1.5,
@@ -25,7 +25,7 @@ generate_interval_analysis_lm <- function(daily, weekly) {
 
    plot_to_file_end()
 
-   plot_to_file_start("weekly_daily_lm_residuals")
+   plot_to_file_start("rq_2_3_weekly_daily_lm_residuals")
 
    op <- par(mfrow = c(2, 2))
    for (i in 1:4) {

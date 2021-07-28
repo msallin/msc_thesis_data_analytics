@@ -24,15 +24,17 @@ interval_analysis_data_prep <- function(daily, weekly) {
          
          # The factors used represent timespans and hence calculating the mean is possible.
          # It is the same as taking the mean amount of hours represented in a span, sum and average this.
-         daily_rework <- mean(daily_participant$rework)
-         daily_manual <- mean(daily_participant$manual)
-         daily_communication <- mean(daily_participant$communication)
-         daily_administrative_demands <- mean(daily_participant$administrative_demands)
-         daily_other_duties <- mean(daily_participant$other_duties)
+         daily_rework <- mean(recode_daily_factor_to_mean(daily_participant$rework))
+         daily_rework <- mean(recode_daily_factor_to_mean(daily_participant$rework))
+         daily_manual <- mean(recode_daily_factor_to_mean(daily_participant$manual))
+         daily_communication <- mean(recode_daily_factor_to_mean(daily_participant$communication))
+         daily_administrative_demands <- mean(recode_daily_factor_to_mean(daily_participant$administrative_demands))
+         daily_other_duties <- mean(recode_daily_factor_to_mean(daily_participant$other_duties))
+         daily_knowledge <- mean(recode_daily_factor_to_mean(daily_participant$knowledge))
+         daily_cognitive_load <- mean(recode_daily_factor_to_mean(daily_participant$cognitive_load))
+         daily_complex_solution <- mean(recode_daily_factor_to_mean(daily_participant$complex_solution))
+         
          daily_customer <- mean(daily_participant$customer)
-         daily_cognitive_load <- mean(daily_participant$cognitive_load)
-         daily_complex_solution <- mean(daily_participant$complex_solution)
-         daily_knowledge <- mean(daily_participant$knowledge)
 
          daily_administrative_demands_delay <- mean(daily_participant$administrative_demands_delay)
          daily_missing_automation_delay <- mean(daily_participant$missing_automation_delay)
@@ -106,13 +108,26 @@ interval_analysis_data_prep <- function(daily, weekly) {
    return(week_aggreations)
 }
 
+recode_daily_factor_to_mean <- function(x) {
+   unlist(lapply(x, function(x) {
+      if(x == "0") return(0)
+      if(x == "1") return(0.5)
+      if(x == "2") return(1.5)
+      if(x == "3") return(3)
+      if(x == "4") return(5)
+      if(x == "5") return(7)
+      if(x == "6") return(8)
+   }))
+}
+
 recode_weekly_duration <- function(weekly_reporting, number_of_days_reported) {
    x <- weekly_reporting/number_of_days_reported
-   if(x == 0) return(0)
-   if(x < 1) return(1)
-   if(x <= 2) return(2)
-   if(x <= 4) return(3)
-   if(x <= 6) return(4)
-   if(x <= 8) return(5)
-   if(x > 8) return(6)
+   return(x)
+   # if(x == 0) return(0)
+   # if(x < 1) return(1)
+   # if(x <= 2) return(2)
+   # if(x <= 4) return(3)
+   # if(x <= 6) return(4)
+   # if(x <= 8) return(5)
+   # if(x > 8) return(6)
 }

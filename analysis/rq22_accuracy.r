@@ -30,7 +30,7 @@ generate_daily_weekly_correlation <- function(daily, weekly) {
    }
 
    arranged_plot <- ggarrange(plotlist = plots)
-   ggsave(plot = arranged_plot, "results/daily_weekly_correlation.pdf", device = "pdf")
+   ggsave(plot = arranged_plot, "results/rq_2_2_daily_weekly_correlation.pdf", device = "pdf")
 }
 
 generate_daily_weekly_difference_boxplots <- function(daily, weekly) {
@@ -54,7 +54,7 @@ calculate_weekly_daily_difference <- function(aggregated_data, column_names) {
 }
 
 print_weekly_daily_difference_overview <- function(results, column_names) {
-   plot_to_file_start("weekly_daily_diff_overview")
+   plot_to_file_start("rq_2_2_weekly_daily_diff_overview")
 
    # Outcomment to generate a a stripchart above the boxplot
    # par(mfrow = c(2, 1))
@@ -64,25 +64,9 @@ print_weekly_daily_difference_overview <- function(results, column_names) {
       main = "Weekly vs Daily Aggregate",
       ylab = "Difference from daily aggregate (h)",
       las = 2
-      # notch = TRUE
    )
 
    abline(h = 0, col = "red", lwd = 0.5, lty = 2)
 
    plot_to_file_end()
 }
-
-# Generate histogram of different waste types
-# hist(unlist(results["rework"], use.names = FALSE))
-
-# Generate boxplot for each waste type
-# par(mfrow = c(4, 4)) # Create a 4 x 4 plotting matrix
-# for (i in seq_len(length(results))) {
-#     name <- names(results[i])
-# 1. Open jpeg file
-# jpeg("RQ3/" %&% name %&% ".jpg", width = 350, height = 350)
-# 2. Create the plot
-# boxplot(results[i], main = name, notch = FALSE)
-# 3. Close the file
-# dev.off()
-# }

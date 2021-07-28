@@ -11,6 +11,8 @@ if (!require(ggpubr)) install.packages("ggpubr") # ggscatter
 if (!require(tm))install.packages("tm")  # for text mining
 if (!require(wordcloud)) install.packages("wordcloud") # word-cloud generator 
 if (!require(RColorBrewer)) install.packages("RColorBrewer") # color palettes
+#if (!require(wordcloud)) install.packages("wordcloud") # word-cloud generator 
+#if (!require(RColorBrewer)) install.packages("RColorBrewer") # color palettes
 
 library("tm")
 # library("wordcloud")
@@ -25,7 +27,7 @@ source("survey/final_survey.r")
 source("survey/daily_survey.r")
 source("survey/weekly_survey.r")
 source("survey/load_all.r")
-source("analysis/rqx_reporting_interval_analysis.r")
+source("analysis/reporting_interval_analysis.r")
 source("analysis/descriptive_stats.r")
 source("analysis/rq21_tool_feedback.r")
 source("analysis/rq22_accuracy.r")

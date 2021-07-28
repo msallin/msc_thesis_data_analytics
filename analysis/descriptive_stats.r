@@ -12,7 +12,7 @@
 # ***********************************************************
 
 generate_descriptive_statistics <- function(daily, weekly) {
-    file_name <- "descriptive.txt"
+    file_name <- "rq_0_descriptive.txt"
     full_name <- recreate_results_file(file_name)
 
     writeLine("1. Number of daily reports: " %&% nrow(daily), full_name)
