@@ -10,7 +10,7 @@
 # H0: No correlation, H1: Correlation
 generate_daily_weekly_correlation <- function(daily, weekly) {
    aggregated_data <- interval_analysis_data_prep(daily, weekly)
-   column_names <- get_data_column_names()
+   column_names <- get_waste_data_column_names()
 
    plots <- list()
    for (column_name in column_names) {
@@ -18,13 +18,16 @@ generate_daily_weekly_correlation <- function(daily, weekly) {
       one_type <- aggregated_data[, one_type_column]
       names(one_type)[1] <- "weekly"
       names(one_type)[2] <- "daily"
+      # one_type$daily = log(one_type$daily)
       plot <- ggscatter(
          one_type,
          x = "weekly", y = "daily", conf.int = TRUE,
          cor.coef = TRUE, cor.method = "spearman",
          xlab = FALSE, ylab = FALSE, title = column_name,
-         size=1
-      ) + geom_smooth(formula = y ~ x, method = "lm")
+         size = 1
+      ) +
+      geom_smooth(formula = y ~ x, method = "loess", size = 0.5, colour = "red") +
+      geom_smooth(formula = y ~ x, method = "lm", size = 0.5, colour = "blue")
       plots[[column_name]] <- plot + rremove("x.text") + rremove("y.text")
    }
 

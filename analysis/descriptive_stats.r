@@ -22,10 +22,17 @@ generate_descriptive_statistics <- function(daily, weekly) {
     sum_time_spent <- sort(colSums(time_spent[, 1:length(time_spent)]), decreasing = TRUE)
     writeLine("3. Which was the category with the most waste?", full_name, emptyLine = TRUE)
     for (i in seq(1, length(time_spent), +1)) {
-        
         txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% "(" %&% sum_time_spent[i] %&% ")"
         writeLine(txt, full_name)
     }
+
+    # par(mar=c(5,10,4,1)+1)
+    # barplot(
+    #     sum_time_spent,
+    #     horiz=TRUE, las=1,
+    #     beside=TRUE, 
+    #     xlim=range(pretty(c(0, sum_time_spent))))
+
     delay <- daily[, c(get_waste_delay_data_column_names())]
     sum_time_spent <- sort(colSums(delay[, 1:length(delay)]), decreasing = TRUE)
 
@@ -38,17 +45,25 @@ generate_descriptive_statistics <- function(daily, weekly) {
     writeLine("5. How stressful is the work environment?", full_name, emptyLine = TRUE)
     stress <- daily[, c("stress")]
     writeLine("  Mean: " %&% mean(stress), full_name)
+    writeLine("  Median: " %&% median(stress), full_name)
     writeLine("  Sd: " %&% sd(stress), full_name)
     writeLine("  Min: " %&% min(stress), full_name)
     writeLine("  Max: " %&% max(stress), full_name)
 
-    writeLine("6. What caused the most stress?", full_name, emptyLine = TRUE)
+    writeLine("6. What was the subjective productivitiy feeling?", full_name, emptyLine = TRUE)
+    productivity <- daily[, c("productivity")]
+    writeLine("  Mean: " %&% mean(productivity), full_name)
+    writeLine("  Sd: " %&% sd(productivity), full_name)
+    writeLine("  Min: " %&% min(productivity), full_name)
+    writeLine("  Max: " %&% max(productivity), full_name)
+
+    writeLine("7. What caused the most stress?", full_name, emptyLine = TRUE)
     stress_causes_subset <- subset(daily, (!is.na(daily$stress_cause) & daily$stress_cause != "<NA>") & daily$stress_cause != "-")
     stress_causes <- stress_causes_subset$stress_cause
     wf <- word_frequency(stress_causes)
     writeLine(head(wf, 10)$word, full_name)
 
-    writeLine("7. What caused the most waste?", full_name, emptyLine = TRUE)
+    writeLine("8. What caused the most waste?", full_name, emptyLine = TRUE)
     main_waste_subset <- subset(daily, (!is.na(daily$main_waste) & daily$main_waste != "<NA>") & daily$main_waste != "-")
     main_waste <- main_waste_subset$main_waste
     wf <- word_frequency(main_waste)

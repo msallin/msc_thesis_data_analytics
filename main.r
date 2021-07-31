@@ -1,26 +1,15 @@
-# TODO-List
-# 1. Clean up data
-# 1.1 Has a participant filled out the daily or weekly two times? If yes, take the latest
-# 1.2 Exclude weeks which were not reported fully
-# 2. Finish descriptive statistics (include cleanup stuff into this)
-
 # update.packages(ask = FALSE)
 if (!require(readxl)) install.packages("readxl") # survey (excel) reading
 if (!require(likert)) install.packages("likert") # likert visualization
 if (!require(ggpubr)) install.packages("ggpubr") # ggscatter
-if (!require(tm))install.packages("tm")  # for text mining
-if (!require(BlandAltmanLeh))install.packages("BlandAltmanLeh")  # for comparison of daily and weekly surveys
-#if (!require(wordcloud)) install.packages("wordcloud") # word-cloud generator 
-#if (!require(RColorBrewer)) install.packages("RColorBrewer") # color palettes
+if (!require(tm)) install.packages("tm")  # for text mining
+if (!require(BlandAltmanLeh)) install.packages("BlandAltmanLeh") # for comparison of daily and weekly surveys
 
 library("tm")
-# library("wordcloud")
-# library("RColorBrewer")
 library("readxl")
 library("likert")
 library("ggpubr")
 library("BlandAltmanLeh")
-
 
 source("misc/utility.r")
 source("misc/metadata.r")
@@ -35,8 +24,7 @@ source("analysis/rq22_accuracy.r")
 source("analysis/rq23_bias.r")
 source("analysis/rq3_fkm_waste.r")
 
-# Load all the data from excel.
-# This will populate some global variables:
+# Load all the data from excel. This will populate some global variables:
 # daily, weekly, fkm, final, tool_feedback
 load_data()
 

@@ -36,13 +36,13 @@ generate_feedback_likert_plots <- function(tool_feedback) {
     p <- plot(likert(likert_one_full_text), wrap=40, text.size=2.5)
     p$layers[[2]]$geom_params$width = 0.8
     p$layers[[3]]$geom_params$width = 0.8
-    p <- p + theme(aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
+    p <- p + theme(plot.margin=grid::unit(c(0,0,0,0), "mm"), aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
     suppressMessages(ggsave(plot = p, "results/rq_2_1_likert_one.pdf", device = "pdf", height = 2.3, width = 11))
 
     p <- plot(likert(likert_two_full_text), wrap=40, text.size=2.5)
     p$layers[[2]]$geom_params$width = 0.8
     p$layers[[3]]$geom_params$width = 0.8
-    p <- p + theme(aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
+    p <- p + theme(plot.margin=grid::unit(c(0,0,0,0), "mm"), aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
     suppressMessages(ggsave(plot = p, "results/rq_2_1_likert_two.pdf", device = "pdf", height = 4, width = 11))
 }
 

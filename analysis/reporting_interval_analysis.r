@@ -36,8 +36,8 @@ interval_analysis_data_prep <- function(daily, weekly) {
          
          daily_customer <- mean(daily_participant$customer)
 
-         daily_administrative_demands_delay <- mean(daily_participant$administrative_demands_delay)
-         daily_missing_automation_delay <- mean(daily_participant$missing_automation_delay)
+         daily_administrative_demands_delay <- sum(recode_daily_delay_factor_to_mean(daily_participant$administrative_demands_delay))
+         daily_missing_automation_delay <- sum(recode_daily_delay_factor_to_mean(daily_participant$missing_automation_delay))
 
          daily_time_waste <- daily_rework + daily_manual + daily_communication + daily_administrative_demands + daily_other_duties + daily_cognitive_load + daily_knowledge + daily_complex_solution
          daily_time_delay <- daily_administrative_demands_delay + daily_missing_automation_delay
@@ -47,7 +47,7 @@ interval_analysis_data_prep <- function(daily, weekly) {
          weekly_productivity <- weekly_for_calendar_week_for_participant$productivity # Scale from 1-10, its expected to be the mean.
 
          # Factor
-         weekly_customer <- weekly_for_calendar_week_for_participant$customer # Its a factor expressing how sure one is to do the right thins, its expected to be the mean
+         weekly_customer <- weekly_for_calendar_week_for_participant$customer # Its a factor expressing how sure one is to do the right thins, its expected to be the mean.
 
          # Durations
          weekly_rework <- recode_weekly_duration(weekly_for_calendar_week_for_participant$rework, number_of_days_reported)
@@ -108,6 +108,20 @@ interval_analysis_data_prep <- function(daily, weekly) {
    return(week_aggreations)
 }
 
+recode_daily_delay_factor_to_mean <- function(x) {
+   return(unlist(x))
+   unlist(lapply(x, function(x) {
+      if(x == "0") return(0) #0h
+      if(x == "1") return(1) #Up to 2h (0+2 /2)
+      if(x == "2") return(3) # ...4h (2+4 /2)
+      if(x == "3") return(6) # ...8h (4+8 / 2)
+      if(x == "4") return(16.6) # ...few days (8+25.2 / 2)
+      if(x == "5") return(29.3) # ...week (16.6+32 / 2)
+      if(x == "5") return(98.65) # ...month (29.3+168 / 2)
+      if(x == "6") return(295.95) # ...multiple months (98.65*3)
+   }))
+}
+
 recode_daily_factor_to_mean <- function(x) {
    unlist(lapply(x, function(x) {
       if(x == "0") return(0)
@@ -122,8 +136,8 @@ recode_daily_factor_to_mean <- function(x) {
 
 recode_weekly_duration <- function(weekly_reporting, number_of_days_reported) {
    return(weekly_reporting)
+   # Use this for normalizing on the day for week/day comparison
    # x <- weekly_reporting/number_of_days_reported
-   return(x)
    # if(x == 0) return(0)
    # if(x < 1) return(1)
    # if(x <= 2) return(2)

@@ -41,7 +41,6 @@ prepare_data <- function(fkm, waste) {
 
     # We are only interested in the fkm score and the summed waste
     lm_data_frame <- data.frame(score, total)
-
     return(lm_data_frame)
 }
 
@@ -62,6 +61,7 @@ spearman_correlation <- function(fkm, waste, title) {
     lm_data_frame <- prepare_data(fkm, waste)
     plot <- ggscatter(lm_data_frame, x = "score", y = "total", conf.int = TRUE,
         cor.coef = TRUE, cor.method = "spearman", title = title,
-        size=1) + geom_smooth(formula = y ~ x, method = "lm")
+        size=1) +
+        geom_smooth(formula = y ~ x, method = "lm", colour = "blue", size = 0.5)
     return(plot)
 }

@@ -1,0 +1,48 @@
+
+rework
+Mean diff: -1.5
+Lower limit: -8.67095251692549
+Lower limit: 5.67095251692549
+Slope p-value: 0.293109513477275
+
+manual
+Mean diff: -0.722222222222222
+Lower limit: -4.22402620176064
+Lower limit: 2.7795817573162
+Slope p-value: 0.722040868668774
+
+communication
+Mean diff: -1.54166666666667
+Lower limit: -5.64213737135412
+Lower limit: 2.55880403802078
+Slope p-value: 0.00128508639382301
+
+administrative_demands
+Mean diff: -0.638888888888889
+Lower limit: -4.67349144400851
+Lower limit: 3.39571366623073
+Slope p-value: 0.655335625965399
+
+other_duties
+Mean diff: -0.347222222222222
+Lower limit: -5.34326977114638
+Lower limit: 4.64882532670194
+Slope p-value: 0.493677371695983
+
+cognitive_load
+Mean diff: -0.0972222222222222
+Lower limit: -4.52860249377544
+Lower limit: 4.334158049331
+Slope p-value: 0.0172603236339662
+
+complex_solution
+Mean diff: -0.347222222222222
+Lower limit: -4.99027413999259
+Lower limit: 4.29582969554815
+Slope p-value: 0.0143745241298005
+
+knowledge
+Mean diff: -0.597222222222222
+Lower limit: -6.27696967357172
+Lower limit: 5.08252522912727
+Slope p-value: 0.680367000933371
