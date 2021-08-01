@@ -1,3 +1,9 @@
+# ***********************************************************
+# Daily Survey
+# ***********************************************************
+# This script reads and prepares the daily survey data for further processing.
+# ***********************************************************
+
 get_daily <- function(daily_sheet) {
 
     names <- c("productivity", "stress", "rework", "manual", "missing_automation_delay", "communication", "administrative_demands", "administrative_demands_delay", "other_duties", "customer", "cognitive_load", "complex_solution", "knowledge")

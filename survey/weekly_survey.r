@@ -1,3 +1,8 @@
+# ***********************************************************
+# Weekly Survey
+# ***********************************************************
+# This script reads and prepares the final survey data for further processing.
+# ***********************************************************
 
 get_weekly <- function(weekly_sheet) {
     weekly_sheet_new <- as.data.frame(weekly_sheet)

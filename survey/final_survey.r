@@ -1,3 +1,9 @@
+# ***********************************************************
+# Final Survey
+# ***********************************************************
+# This script reads and prepares the final survey data for further processing.
+# ***********************************************************
+
 get_fkm <- function(final) {
     final_new <- get_final(final)
     fkm_columns <- c(9, 10, 11, 12, 21)

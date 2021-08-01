@@ -52,3 +52,8 @@ lot
 missing
 waiting
 dept
+
+9. How many weekly data points have missing daily survey?
+Missing data for: 6
+Total: 36
+Candidates: 4

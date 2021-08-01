@@ -1,3 +1,5 @@
+# TODO: Delete after finishing the analysis...
+
 analysis_something <- function() {
     hist(daily$stress)
     hist(daily$productivity)
@@ -27,10 +29,9 @@ analysis_something <- function() {
 }
 
 
-generate_interval_analysis_lm <- function(daily, weekly) {
-   week_aggreations <- interval_analysis_data_prep(daily, weekly)
-   model <- lm(daily_time_waste ~ weekly_time_waste, data = week_aggreations)
-   newx <- seq(min(week_aggreations$weekly_time_waste), max(week_aggreations$weekly_time_waste), by = 0.05)
+generate_interval_analysis_lm <- function(aggregated_data) {
+   model <- lm(daily_time_waste ~ weekly_time_waste, data = aggregated_data)
+   newx <- seq(min(aggregated_data$weekly_time_waste), max(aggregated_data$weekly_time_waste), by = 0.05)
    conf_interval <- predict(model,
       newdata = data.frame(weekly_time_waste = newx), interval = "confidence",
       level = 0.95
@@ -40,7 +41,7 @@ generate_interval_analysis_lm <- function(daily, weekly) {
    plot_to_file_start("rq_2_3_weekly_daily_lm")
 
    plot(daily_time_waste ~ weekly_time_waste,
-      data = week_aggreations, col = "grey", pch = 20, cex = 1.5,
+      data = aggregated_data, col = "grey", pch = 20, cex = 1.5,
       main = "Weekly Aggregated vs Reported"
    )
    abline(model, col = "red", lwd = 2)

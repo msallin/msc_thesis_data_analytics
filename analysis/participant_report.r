@@ -1,7 +1,8 @@
 # ***********************************************************
 # Participant Report:
 # ***********************************************************
-# TODO: Describe file
+# NOT PART OF STUDY!
+# Generates the individual candidate report.
 # 1. How much waste did you experience?
 # 2. How much delay did you experience?
 # 3. What was your averge stress score?

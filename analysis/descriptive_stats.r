@@ -7,8 +7,10 @@
 # 3. Which was the category with the most waste?
 # 4. Which was the category with the most delay?
 # 5. How stressful is the work environment?
-# 6. What caused the most stress?
-# 7. What caused the most waste?
+# 6. What was the subjective productivitiy feeling?
+# 7. What caused the most stress?
+# 8. What caused the most waste?
+# 9. How many week data points have missing daily surveys?
 # ***********************************************************
 
 generate_descriptive_statistics <- function(daily, weekly) {
@@ -25,13 +27,6 @@ generate_descriptive_statistics <- function(daily, weekly) {
         txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% "(" %&% sum_time_spent[i] %&% ")"
         writeLine(txt, full_name)
     }
-
-    # par(mar=c(5,10,4,1)+1)
-    # barplot(
-    #     sum_time_spent,
-    #     horiz=TRUE, las=1,
-    #     beside=TRUE, 
-    #     xlim=range(pretty(c(0, sum_time_spent))))
 
     delay <- daily[, c(get_waste_delay_data_column_names())]
     sum_time_spent <- sort(colSums(delay[, 1:length(delay)]), decreasing = TRUE)
@@ -69,11 +64,10 @@ generate_descriptive_statistics <- function(daily, weekly) {
     wf <- word_frequency(main_waste)
     writeLine(head(wf, 10)$word, full_name)
 
-    # What is the distribution of the differently reported waste types?
-    # par(mfrow=c(2,4))
-    # for (col in 1:ncol(time_spent)) {
-    #     hist(time_spent[,col])
-    # }
+    writeLine("9. How many weekly data points have missing daily survey?", full_name, emptyLine = TRUE)
+    writeLine("Missing data for: " %&% nrow(weekly[weekly$missing_data == TRUE, ]), full_name)
+    writeLine("Total: " %&% nrow(weekly), full_name)
+    writeLine("Candidates: " %&% length(unique(weekly[weekly$missing_data == TRUE, ]$id)), full_name)
 }
 
 word_frequency <- function(input) {
@@ -93,6 +87,8 @@ word_frequency <- function(input) {
     d <- data.frame(word = names(wordFreq), freq=wordFreq)
     return(d)
 
+    # Tried but doesn't make up a good picture.
+    # Maybe try it again after all data is collected.
     # grayLevels <- gray( (wordFreq+10) / (max(wordFreq)+10) ) # sets number of gray shades to use
     # wordcloud(words=names(wordFreq), freq=wordFreq, min.freq=2, random.order=F, colors=grayLevels)
 }

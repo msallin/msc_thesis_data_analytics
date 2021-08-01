@@ -1,3 +1,9 @@
+# ***********************************************************
+# Load all
+# ***********************************************************
+# This script loads all from excel data and populates global variables
+# ***********************************************************
+
 load_data <- function() {
     result_file <- "C:\\Users\\marcs\\OneDrive\\Documents\\School\\6 - FHNW MSc Engineering\\Project 9 Thesis\\results.xlsx" # file.choose()
     daily_sheet <- read_excel(result_file, sheet = "Daily Survey")

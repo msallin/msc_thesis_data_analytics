@@ -1,7 +1,8 @@
 # ***********************************************************
 # RQ2.1: How can a self-reporting tool help to identify waste?
 # ***********************************************************
-# TODO: Describe file
+# This script generates plots to visualize (and interpret) the answers
+# to the likert questions for evaluating the tool.
 # ***********************************************************
 
 generate_feedback_likert_plots <- function(tool_feedback) {

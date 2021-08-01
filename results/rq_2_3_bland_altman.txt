@@ -1,48 +1,72 @@
 
-rework
+Stress
+Mean diff: -0.896759259259259
+Lower limit: -3.44288974625126
+Upper limit: 1.64937122773274
+Slope p-value: 0.119554711367767
+
+Customer
+Mean diff: -0.111111111111111
+Lower limit: -1.41777777777778
+Upper limit: 1.19555555555556
+Slope p-value: 0.899474791288823
+
+Automation Delay
+Mean diff: -1.52777777777778
+Lower limit: -6.71315636676346
+Upper limit: 3.6576008112079
+Slope p-value: 0.00223828354903736
+
+Admin Demands Delay
+Mean diff: -0.916666666666667
+Lower limit: -6.40816555130645
+Upper limit: 4.57483221797312
+Slope p-value: 7.39620814115296e-05
+
+Rework
 Mean diff: -1.5
 Lower limit: -8.67095251692549
-Lower limit: 5.67095251692549
+Upper limit: 5.67095251692549
 Slope p-value: 0.293109513477275
 
-manual
+Manual Work
 Mean diff: -0.722222222222222
 Lower limit: -4.22402620176064
-Lower limit: 2.7795817573162
+Upper limit: 2.7795817573162
 Slope p-value: 0.722040868668774
 
-communication
+Communication
 Mean diff: -1.54166666666667
 Lower limit: -5.64213737135412
-Lower limit: 2.55880403802078
+Upper limit: 2.55880403802078
 Slope p-value: 0.00128508639382301
 
-administrative_demands
+Admin Demands
 Mean diff: -0.638888888888889
 Lower limit: -4.67349144400851
-Lower limit: 3.39571366623073
+Upper limit: 3.39571366623073
 Slope p-value: 0.655335625965399
 
-other_duties
+Other Duties
 Mean diff: -0.347222222222222
 Lower limit: -5.34326977114638
-Lower limit: 4.64882532670194
+Upper limit: 4.64882532670194
 Slope p-value: 0.493677371695983
 
-cognitive_load
+Cognitive Load
 Mean diff: -0.0972222222222222
 Lower limit: -4.52860249377544
-Lower limit: 4.334158049331
+Upper limit: 4.334158049331
 Slope p-value: 0.0172603236339662
 
-complex_solution
+Complex Solution
 Mean diff: -0.347222222222222
 Lower limit: -4.99027413999259
-Lower limit: 4.29582969554815
+Upper limit: 4.29582969554815
 Slope p-value: 0.0143745241298005
 
-knowledge
+Knowledge
 Mean diff: -0.597222222222222
 Lower limit: -6.27696967357172
-Lower limit: 5.08252522912727
+Upper limit: 5.08252522912727
 Slope p-value: 0.680367000933371

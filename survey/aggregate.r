@@ -1,13 +1,13 @@
-interval_analysis_data_prep <- function(daily, weekly) {
+# ***********************************************************
+# Aggregate
+# ***********************************************************
+# This script aggregates the daily and weekly data into one data set.
+# ***********************************************************
+
+aggregated_daily_and_weekly_data <- function(daily, weekly) {
    calendar_weeks_reported <- unique(weekly$calendarWeek)
-
-   # TODO: Remove
-   calendar_week <- 28
-   participant_id <- "4e10a96a-9a1b-4c41-b410-f7e593932e1f"
-   participant_id <- "2c8f98b5-dc6d-4082-b1a3-6dc70b0deda3"
-   participant_id <- "3af8086e-b320-4c3e-bc8a-8edff40fec93"
-
    week_aggreations <- data.frame()
+
    for (calendar_week in calendar_weeks_reported) {
       weekly_for_calendar_week <- subset(weekly, calendarWeek == calendar_week)
       participants_for_this_week <- unique(weekly_for_calendar_week$id)
@@ -34,13 +34,16 @@ interval_analysis_data_prep <- function(daily, weekly) {
          daily_cognitive_load <- sum(recode_daily_factor_to_mean(daily_participant$cognitive_load))
          daily_complex_solution <- sum(recode_daily_factor_to_mean(daily_participant$complex_solution))
          
-         daily_customer <- mean(daily_participant$customer)
+         daily_customer <- round(mean(daily_participant$customer), digits=0)
 
          daily_administrative_demands_delay <- sum(recode_daily_delay_factor_to_mean(daily_participant$administrative_demands_delay))
          daily_missing_automation_delay <- sum(recode_daily_delay_factor_to_mean(daily_participant$missing_automation_delay))
 
          daily_time_waste <- daily_rework + daily_manual + daily_communication + daily_administrative_demands + daily_other_duties + daily_cognitive_load + daily_knowledge + daily_complex_solution
          daily_time_delay <- daily_administrative_demands_delay + daily_missing_automation_delay
+
+         # Metadata
+         missing_data <- weekly_for_calendar_week_for_participant$missing_data
 
          # Scale
          weekly_stress <- weekly_for_calendar_week_for_participant$stress # Scale from 1-10, its expected to be the mean.
@@ -99,7 +102,8 @@ interval_analysis_data_prep <- function(daily, weekly) {
             weekly_complex_solution,
             weekly_knowledge,
             weekly_time_waste,
-            weekly_time_delay
+            weekly_time_delay,
+            missing_data
          )
          week_aggreations <- rbind(week_aggreations, week_aggreations_row)
       }
