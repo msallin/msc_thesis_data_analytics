@@ -38,6 +38,8 @@ bland_altman_analysis <- function(measurements, title, file) {
    writeLine("Lower limit: " %&% stats$lower.limit, file)
    writeLine("Upper limit: " %&%stats$upper.limit, file)
 
+   # If missing data points should be drawn in a different color, create own graphic:
+   # https://mran.microsoft.com/snapshot/2014-10-25/web/packages/BlandAltmanLeh/vignettes/Intro.html
    bland.altman.plot(A, B, main="", xlab="Means", ylab="Differences", pch=19)
    title(main=title, cex.main=1)
 

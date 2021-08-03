@@ -1,0 +1,5 @@
+Weekly Daily Diff
+Mean: 0.597222222222222
+Mean: NaN
+SD: 2.89783033232117
+SD: NA

@@ -57,11 +57,13 @@ calculate_weekly_daily_difference <- function(aggregated_data, column_names) {
       one_type$difference <- one_type$daily - one_type$weekly
       one_type$percentage_difference <- (one_type$difference / one_type$mean) * 100
 
-      # TODO: Write to file
-      mean(one_type$difference)
-      mean(one_type$percentage_difference)
-      sd(one_type$difference)
-      sd(one_type$percentage_difference)
+      file_name <- "rq_2_2_weekly_daily_diff.txt"
+      full_name <- recreate_results_file(file_name)
+      writeLine("Weekly Daily Diff", full_name)
+      writeLine("Mean: " %&% mean(one_type$difference), full_name)
+      writeLine("Mean: " %&% mean(one_type$percentage_difference), full_name)
+      writeLine("SD: " %&% sd(one_type$difference), full_name)
+      writeLine("SD: " %&% sd(one_type$percentage_difference), full_name)
 
       results[waste_title[name]] <- one_type["difference"]
    }

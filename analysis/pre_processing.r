@@ -21,6 +21,8 @@ find_wrongly_reported_weeks <- function(final, daily) {
 
 find_missing_reportings <- function(daily, weekly, final) {
     weekly$missing_data <- FALSE
+    file_name <- "pre_processing.txt"
+    full_name <- recreate_results_file(file_name)
 
     participant_ids <- unique(final$id)
     for (participant_id in participant_ids) {
@@ -52,8 +54,8 @@ find_missing_reportings <- function(daily, weekly, final) {
                 day_to_check <- first_day_of_reporting + i
                 day_to_check_string <- format(day_to_check, "%d.%m")
                 if(!any(day_to_check_string == days_reported)) {
-                    print(participant_id %&% " missed: " %&% day_to_check %&% " cw: " %&% week)
-                    print(days_reported)
+                    writeLine(participant_id %&% " missed: " %&% day_to_check %&% " cw: " %&% week, full_name)
+                    writeLine(days_reported, full_name)
                     weekly <- transform(weekly, missing_data = ifelse(!missing_data, calendarWeek == week & id == participant_id, missing_data))
                 }
             }
