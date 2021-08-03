@@ -58,9 +58,9 @@ fit_lm <- function(fkm, waste, title) {
 
 spearman_correlation <- function(fkm, waste, title) {
     lm_data_frame <- prepare_data(fkm, waste)
-    plot <- ggscatter(lm_data_frame, x = "score", y = "total", conf.int = TRUE,
-        cor.coef = TRUE, cor.method = "spearman", title = title,
-        size=1) +
-        geom_smooth(formula = y ~ x, method = "lm", colour = "blue", size = 0.5)
+    plot <- ggscatter(lm_data_frame, x = "score", y = "total",
+        conf.int = TRUE, title = title, size=1) +
+        geom_smooth(formula = y ~ x, method = "lm", colour = "blue", size = 0.5) +
+        stat_cor(method = "spearman", cor.coef.name = "rho")
     return(plot)
 }
