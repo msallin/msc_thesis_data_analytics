@@ -49,6 +49,10 @@ generate_daily_weekly_difference_boxplots <- function(aggregated_data) {
 
 calculate_weekly_daily_difference <- function(aggregated_data, column_names) {
    results <- list()
+
+   file_name <- "rq_2_2_weekly_daily_diff.txt"
+   full_name <- recreate_results_file(file_name)
+
    for (name in get_data_column_names()) {
       columns <- c("weekly_" %&% name, "daily_" %&% name)
       one_type <- aggregated_data[, columns]
@@ -56,14 +60,13 @@ calculate_weekly_daily_difference <- function(aggregated_data, column_names) {
       one_type$mean <- (one_type$daily + one_type$weekly) / 2
       one_type$difference <- one_type$daily - one_type$weekly
       one_type$percentage_difference <- (one_type$difference / one_type$mean) * 100
+      one_type$percentage_difference[ is.na(one_type$percentage_difference) ] <- 0
 
-      file_name <- "rq_2_2_weekly_daily_diff.txt"
-      full_name <- recreate_results_file(file_name)
-      writeLine("Weekly Daily Diff", full_name)
-      writeLine("Mean: " %&% mean(one_type$difference), full_name)
-      writeLine("Mean: " %&% mean(one_type$percentage_difference), full_name)
-      writeLine("SD: " %&% sd(one_type$difference), full_name)
-      writeLine("SD: " %&% sd(one_type$percentage_difference), full_name)
+      writeLine("Weekly Daily Diff: " %&% name, full_name, emptyLine = TRUE)
+      writeLine("Mean diff: " %&% mean(one_type$difference), full_name)
+      writeLine("Mean %: " %&% mean(one_type$percentage_difference), full_name)
+      writeLine("SD diff: " %&% sd(one_type$difference), full_name)
+      writeLine("SD %: " %&% sd(one_type$percentage_difference), full_name)
 
       results[waste_title[name]] <- one_type["difference"]
    }

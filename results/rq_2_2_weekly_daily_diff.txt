@@ -1,5 +1,78 @@
-Weekly Daily Diff
-Mean: 0.597222222222222
-Mean: NaN
-SD: 2.89783033232117
-SD: NA
+
+Weekly Daily Diff: productivity
+Mean diff: -0.36712962962963
+Mean %: -7.67957907923034
+SD diff: 1.01681486906622
+SD %: 21.5881003716186
+
+Weekly Daily Diff: stress
+Mean diff: 0.896759259259259
+Mean %: 36.6415914778628
+SD diff: 1.29904616683265
+SD %: 68.6179227555672
+
+Weekly Daily Diff: customer
+Mean diff: 0.111111111111111
+Mean %: 2.94532627865961
+SD diff: 0.666666666666667
+SD %: 19.3459049506811
+
+Weekly Daily Diff: missing_automation_delay
+Mean diff: 1.52777777777778
+Mean %: 76.4116497449831
+SD diff: 2.64560132091106
+SD %: 96.8928486516969
+
+Weekly Daily Diff: administrative_demands_delay
+Mean diff: 0.916666666666667
+Mean %: 17.308821642155
+SD diff: 2.80178514522438
+SD %: 112.276573494365
+
+Weekly Daily Diff: rework
+Mean diff: 1.5
+Mean %: 74.9377075903714
+SD diff: 3.65864924332933
+SD %: 97.3368362224235
+
+Weekly Daily Diff: manual
+Mean diff: 0.722222222222222
+Mean %: 37.8413452923257
+SD diff: 1.78663468343797
+SD %: 80.5337976479279
+
+Weekly Daily Diff: communication
+Mean diff: 1.54166666666667
+Mean %: 70.6615402305058
+SD diff: 2.09207689014666
+SD %: 87.7190971677402
+
+Weekly Daily Diff: administrative_demands
+Mean diff: 0.638888888888889
+Mean %: 28.2057705147631
+SD diff: 2.05847069138756
+SD %: 108.968523675201
+
+Weekly Daily Diff: other_duties
+Mean diff: 0.347222222222222
+Mean %: -7.52440482314533
+SD diff: 2.54900385149192
+SD %: 96.3633632285773
+
+Weekly Daily Diff: cognitive_load
+Mean diff: 0.0972222222222222
+Mean %: 13.507405668531
+SD diff: 2.26090830181287
+SD %: 106.397817121098
+
+Weekly Daily Diff: complex_solution
+Mean diff: 0.347222222222222
+Mean %: 47.3762326043028
+SD diff: 2.36890403967876
+SD %: 111.107638437093
+
+Weekly Daily Diff: knowledge
+Mean diff: 0.597222222222222
+Mean %: 27.1119732458405
+SD diff: 2.89783033232117
+SD %: 103.864869538312
