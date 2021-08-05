@@ -1,43 +1,43 @@
-1. Number of daily reports: 189
+1. Number of daily reports: 204
 
 2. Number of weekly reports: 36
 
 3. Which was the category with the most waste?
-  1. rework(213)
-  2. other_duties(165)
-  3. knowledge(157)
-  4. administrative_demands(142)
-  5. cognitive_load(140)
-  6. manual(138)
-  7. communication(127)
-  8. complex_solution(98)
+  1. rework(220)
+  2. other_duties(170)
+  3. knowledge(161)
+  4. administrative_demands(157)
+  5. cognitive_load(146)
+  6. manual(145)
+  7. communication(142)
+  8. complex_solution(104)
 
 4. Which was the category with the most delay?
-  1. administrative_demands_delay (120)
-  2. missing_automation_delay (66)
+  1. administrative_demands_delay (122)
+  2. missing_automation_delay (72)
 
 5. How stressful is the work environment?
-  Mean: 2.33862433862434
+  Mean: 2.30392156862745
   Median: 2
-  Sd: 2.26481886261756
+  Sd: 2.22962240584274
   Min: 0
   Max: 8
 
 6. What was the subjective productivitiy feeling?
-  Mean: 6.05291005291005
-  Sd: 2.1946149028141
+  Mean: 6.00980392156863
+  Sd: 2.24813046813523
   Min: 1
   Max: 10
 
 7. What caused the most stress?
 nothing
 deadline
-meeting
 meetings
+meeting
 work
+coworker
 sprint
 today
-coworker
 last
 many
 
@@ -46,14 +46,14 @@ meetings
 technical
 meeting
 debt
+missing
 work
+documentation
 focus
 lot
-missing
 waiting
-dept
 
 9. How many weekly data points have missing daily survey?
-Missing data for: 6
+Missing data for: 10
 Total: 36
-Candidates: 4
+Candidates: 7

@@ -28,6 +28,7 @@ generate_daily_weekly_correlation <- function(aggregated_data) {
          xlab = FALSE, ylab = FALSE, title = waste_title[column_name],
          size = 1
       ) +
+      font("title", size = 10) +
       geom_smooth(formula = y ~ x, method = "loess", size = 0.5, colour = "red") +
       geom_smooth(formula = y ~ x, method = "lm", size = 0.5, colour = "blue") +
       stat_cor(method = "spearman", cor.coef.name = "rho") + # Add correlation coefficient w/o distingish between missing_data
@@ -77,6 +78,9 @@ calculate_weekly_daily_difference <- function(aggregated_data, column_names) {
 print_weekly_daily_difference_overview <- function(results, column_names) {
    plot_to_file_start("rq_2_2_weekly_daily_diff_overview")
    par(mar=c(9,4,1,1))
+
+   par(cex.lab=0.85) # is for y-axis
+   par(cex.axis=0.85) # is for x-axis
 
    boxplot(results,
       main = "",
