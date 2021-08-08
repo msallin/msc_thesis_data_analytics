@@ -22,9 +22,11 @@ generate_descriptive_statistics <- function(daily, weekly) {
 
     time_spent <- daily[, c(get_waste_time_spent_column_names())]
     sum_time_spent <- sort(colSums(time_spent[, 1:length(time_spent)]), decreasing = TRUE)
+    total_sum_time_spent <- sum(time_spent)
     writeLine("3. Which was the category with the most waste?", full_name, emptyLine = TRUE)
     for (i in seq(1, length(time_spent), +1)) {
-        txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% "(" %&% sum_time_spent[i] %&% ")"
+        fraction <- round((sum_time_spent[i] / total_sum_time_spent) * 100, 2)
+        txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% "(" %&% sum_time_spent[i] %&% " " %&% fraction %&% "%)"
         writeLine(txt, full_name)
     }
 
@@ -65,9 +67,10 @@ generate_descriptive_statistics <- function(daily, weekly) {
     writeLine(head(wf, 10)$word, full_name)
 
     writeLine("9. How many weekly data points have missing daily survey?", full_name, emptyLine = TRUE)
-    writeLine("Missing data for: " %&% nrow(weekly[weekly$missing_data == TRUE, ]), full_name)
-    writeLine("Total: " %&% nrow(weekly), full_name)
-    writeLine("Candidates: " %&% length(unique(weekly[weekly$missing_data == TRUE, ]$id)), full_name)
+    writeLine("Missing data (#weeks): " %&% nrow(weekly[weekly$missing_data == TRUE, ]), full_name)
+    writeLine("Total (#weeks): " %&% nrow(weekly), full_name)
+    writeLine("Candidates (with missing): " %&% length(unique(weekly[weekly$missing_data == TRUE, ]$id)), full_name)
+    writeLine("Candidates (without missing): " %&% length(unique(weekly[weekly$missing_data == FALSE, ]$id)), full_name)
 }
 
 word_frequency <- function(input) {
