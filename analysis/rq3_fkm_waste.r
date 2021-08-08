@@ -32,10 +32,17 @@ generate_regression_fkm_waste <- function(daily, fkm) {
 }
 
 prepare_data <- function(fkm, waste) {
-   fkm_waste <- merge(fkm, waste, by = "id")
+    fkm_waste <- merge(fkm, waste, by = "id")
     
-    # The first six columns are fkm or metadata releated
-    total <- rowSums(fkm_waste[, 6:length(fkm_waste)])
+    total <- 0
+    # If there is only one column, now rowSum is necessary but only select the column
+    if(length(fkm_waste) == 7) {
+        total <- fkm_waste[, 7]
+    } else {
+        # The first six columns are fkm or metadata releated
+       total <- rowSums(fkm_waste[, 7:length(fkm_waste)])
+    }
+    
     score <- fkm_waste$fkm_score 
 
     # We are only interested in the fkm score and the summed waste
