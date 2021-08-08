@@ -42,20 +42,6 @@ prepare_data <- function(fkm, waste) {
     lm_data_frame <- data.frame(score, total)
     return(lm_data_frame)
 }
-
-fit_lm <- function(fkm, waste, title) {
-    lm_data_frame <- prepare_data(fkm, waste)
-
-    lm <- lm(score ~ ., data = lm_data_frame)
-    summary(lm)
-    plot(score ~ ., data = lm_data_frame, 
-        main = title,
-        xlab = "Waste", ylab = "FKM Score",
-        col = "grey",
-        pch = 20, cex = 1.5)
-    abline(lm, lwd = 1)
-}
-
 spearman_correlation <- function(fkm, waste, title) {
     lm_data_frame <- prepare_data(fkm, waste)
     plot <- ggscatter(lm_data_frame, x = "score", y = "total",
