@@ -5,6 +5,16 @@
 # Some methods are only used one time and corrected in the results and some enricht/transform the data.
 # ***********************************************************
 
+find_participants_without_final <- function(final, weekly) {
+    d <- unique(daily$id)
+    w <- unique(weekly$id)
+    f <- unique(final$id)
+
+    print(setdiff(d, w)) # reported daily but not weekly
+    print(setdiff(w, f)) # reported weekly but not final
+    print(setdiff(d, f)) # reported daily but not final
+}
+
 # This code was used one time to do manual data clean up because it was much easiert to do it manually than do it with code.
 find_wrongly_reported_weeks <- function(final, daily) {
     participants <- unique(final$id)

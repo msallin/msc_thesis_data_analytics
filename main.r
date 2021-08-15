@@ -30,6 +30,7 @@ source("analysis/rq3_fkm_waste.r")
 load_data()
 
 # Pre processing
+find_participants_without_final(daily, weekly, final)
 find_wrongly_reported_weeks(final, daily)
 weekly <- find_missing_reportings(daily, weekly, final)
 
