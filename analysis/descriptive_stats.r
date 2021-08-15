@@ -58,13 +58,22 @@ generate_descriptive_statistics <- function(daily, weekly) {
     stress_causes_subset <- subset(daily, (!is.na(daily$stress_cause) & daily$stress_cause != "<NA>") & daily$stress_cause != "-")
     stress_causes <- stress_causes_subset$stress_cause
     wf <- word_frequency(stress_causes)
-    writeLine(head(wf, 10)$word, full_name)
+    stress_top <- head(wf, 15)
+    for (i in 1:nrow(stress_top)) {
+       to_print <- toString(stress_top$word[i]) %&% " " %&% toString(stress_top$freq[i])
+       writeLine(to_print, full_name)
+    }
 
     writeLine("8. What caused the most waste?", full_name, emptyLine = TRUE)
+    writeLine("8.1 Daily?", full_name, emptyLine = TRUE)
     main_waste_subset <- subset(daily, (!is.na(daily$main_waste) & daily$main_waste != "<NA>") & daily$main_waste != "-")
     main_waste <- main_waste_subset$main_waste
     wf <- word_frequency(main_waste)
-    writeLine(head(wf, 10)$word, full_name)
+    waste_daily_top <- head(wf, 15)
+    for (i in 1:nrow(waste_daily_top)) {
+       to_print <- toString(waste_daily_top$word[i]) %&% " " %&% toString(waste_daily_top$freq[i])
+       writeLine(to_print, full_name)
+    }
 
     writeLine("9. How many weekly data points have missing daily survey?", full_name, emptyLine = TRUE)
     writeLine("Missing data (#weeks): " %&% nrow(weekly[weekly$missing_data == TRUE, ]), full_name)
