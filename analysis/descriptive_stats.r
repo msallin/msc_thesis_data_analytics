@@ -75,6 +75,16 @@ generate_descriptive_statistics <- function(daily, weekly) {
        writeLine(to_print, full_name)
     }
 
+    writeLine("8.2 Weekly?", full_name, emptyLine = TRUE)
+    main_waste_subset <- subset(weekly, (!is.na(weekly$main_waste) & weekly$main_waste != "<NA>") & weekly$main_waste != "-")
+    main_waste <- main_waste_subset$main_waste
+    wf <- word_frequency(main_waste)
+    waste_weekly_top <- head(wf, 15)
+    for (i in 1:nrow(waste_weekly_top)) {
+       to_print <- toString(waste_weekly_top$word[i]) %&% " " %&% toString(waste_weekly_top$freq[i])
+       writeLine(to_print, full_name)
+    }
+
     writeLine("9. How many weekly data points have missing daily survey?", full_name, emptyLine = TRUE)
     writeLine("Missing data (#weeks): " %&% nrow(weekly[weekly$missing_data == TRUE, ]), full_name)
     writeLine("Total (#weeks): " %&% nrow(weekly), full_name)
