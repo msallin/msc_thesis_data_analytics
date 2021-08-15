@@ -76,13 +76,16 @@ generate_descriptive_statistics <- function(daily, weekly) {
 word_frequency <- function(input) {
     splitted_input <- unlist(strsplit(input, split = ","))
     splitted_input <- unlist(strsplit(splitted_input, split = ";"))
-
+    splitted_input <- removeWords(splitted_input, stopwords("english"))
+    splitted_input <- removeNumbers(splitted_input)
+    splitted_input <- removePunctuation(splitted_input)
+    splitted_input <- gsub("    ", " ", splitted_input)
+    splitted_input <- gsub("   ", " ", splitted_input)
+    splitted_input <- gsub("  ", " ", splitted_input)
+    splitted_input <- tolower(splitted_input)
+    splitted_input <- trimws(splitted_input)
+    splitted_input <- gsub(" ", "_", splitted_input)
     docs <- VCorpus(VectorSource(splitted_input))
-    docs <- tm_map(docs, content_transformer(tolower))
-    docs <- tm_map(docs, removeNumbers)
-    docs <- tm_map(docs, removeWords, stopwords("english"))
-    docs <- tm_map(docs, removePunctuation)
-    docs <- tm_map(docs, stripWhitespace)
 
     dtm <- TermDocumentMatrix(docs)
     m <- as.matrix(dtm)
