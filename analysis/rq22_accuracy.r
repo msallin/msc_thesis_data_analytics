@@ -54,8 +54,8 @@ calculate_weekly_daily_difference <- function(aggregated_data, column_names) {
    file_name <- "rq_2_2_weekly_daily_diff.txt"
    full_name <- recreate_results_file(file_name)
 
-   for (name in get_data_column_names()) {
-      columns <- c("weekly_" %&% name, "daily_" %&% name)
+   for (name in get_waste_data_column_names()) {
+      columns <- c("daily_" %&% name, "weekly_" %&% name)
       one_type <- aggregated_data[, columns]
       names(one_type) <- c("daily", "weekly")
       one_type$mean <- (one_type$daily + one_type$weekly) / 2
