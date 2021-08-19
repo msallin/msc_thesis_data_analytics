@@ -5,13 +5,16 @@
 # Some methods are only used one time and corrected in the results and some enricht/transform the data.
 # ***********************************************************
 
-find_participants_without_final <- function(final, weekly) {
+find_participants_without_final <- function(daily, weekly, final) {
     d <- unique(daily$id)
     w <- unique(weekly$id)
     f <- unique(final$id)
 
+    print("Diff Daily & Weekly:")
     print(setdiff(d, w)) # reported daily but not weekly
+    print("Diff Weekly & Final:")
     print(setdiff(w, f)) # reported weekly but not final
+    print("Diff Daily & Final:")
     print(setdiff(d, f)) # reported daily but not final
 }
 
