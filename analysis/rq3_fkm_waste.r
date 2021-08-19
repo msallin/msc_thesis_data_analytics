@@ -12,19 +12,19 @@ generate_regression_fkm_waste <- function(daily, fkm) {
     correlation_plots <- list()
 
     delay_columns <- daily[, c("id", get_waste_delay_data_column_names())]
-    aggregated_delay <- aggregate(. ~ id, delay_columns, sum)
+    aggregated_delay <- aggregate(. ~ id, delay_columns, mean)
     correlation_plots[["Delay"]] <- fit_lm(filtered_fkm, aggregated_delay, "Delay")
 
     time_spent_columns <- daily[, c("id", get_waste_time_spent_column_names())]
-    aggregated_time_spent <- aggregate(. ~ id, time_spent_columns, sum)
+    aggregated_time_spent <- aggregate(. ~ id, time_spent_columns, mean)
     correlation_plots[["Time Spent"]] <- fit_lm(filtered_fkm, aggregated_time_spent, "Time Spent")
 
     stress_column <- daily[, c("id", "stress")]
-    aggregated_stress <- aggregate(. ~ id, stress_column, sum)
+    aggregated_stress <- aggregate(. ~ id, stress_column, mean)
     correlation_plots[["Stress"]] <- fit_lm(filtered_fkm, aggregated_stress, "Stress")
 
     customer_column <- daily[, c("id", "customer")]
-    aggregated_customer <- aggregate(. ~ id, customer_column, sum)
+    aggregated_customer <- aggregate(. ~ id, customer_column, mean)
     correlation_plots[["Productivity"]] <- fit_lm(filtered_fkm, aggregated_customer, "Customer")
 
     arranged_plot <- ggarrange(plotlist = correlation_plots)
@@ -53,7 +53,7 @@ prepare_data <- function(fkm, waste) {
        total <- rowSums(fkm_waste[, 7:length(fkm_waste)])
     }
     
-    score <- fkm_waste$fkm_score 
+    score <- fkm_waste$fkm_score
 
     # We are only interested in the fkm score and the summed waste
     lm_data_frame <- data.frame(score, total)
