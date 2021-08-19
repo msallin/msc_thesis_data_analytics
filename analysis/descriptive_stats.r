@@ -88,8 +88,12 @@ generate_descriptive_statistics <- function(daily, weekly) {
     writeLine("9. How many weekly data points have missing daily survey?", full_name, emptyLine = TRUE)
     writeLine("Missing data (#weeks): " %&% nrow(weekly[weekly$missing_data == TRUE, ]), full_name)
     writeLine("Total (#weeks): " %&% nrow(weekly), full_name)
-    writeLine("Candidates (with missing): " %&% length(unique(weekly[weekly$missing_data == TRUE, ]$id)), full_name)
-    writeLine("Candidates (without missing): " %&% length(unique(weekly[weekly$missing_data == FALSE, ]$id)), full_name)
+    
+    with_missing <- unique(weekly[weekly$missing_data == TRUE, ]$id)
+    without_missing <- unique(weekly[weekly$missing_data == FALSE, ]$id)
+    nevery_missed_weekly <- setdiff(without_missing, with_missing)
+    writeLine("Candidates (with missing): " %&% length(with_missing), full_name)
+    writeLine("Candidates (without missing): " %&% length(nevery_missed_weekly), full_name)
 }
 
 word_frequency <- function(input) {
