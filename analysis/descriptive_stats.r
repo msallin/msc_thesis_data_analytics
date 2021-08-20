@@ -31,7 +31,9 @@ generate_descriptive_statistics <- function(daily, weekly) {
     }
 
     delay <- daily[, c(get_waste_delay_data_column_names())]
-    sum_time_spent <- sort(colSums(delay[, 1:length(delay)]), decreasing = TRUE)
+    delay$administrative_demands_delay <- recode_daily_delay_factor_to_mean(delay$administrative_demands_delay)
+    delay$missing_automation_delay <- recode_daily_delay_factor_to_mean(delay$missing_automation_delay)
+    sum_delay <- sort(colSums(delay[, 1:length(delay)]), decreasing = TRUE)
 
     writeLine("4. Which was the category with the most delay?", full_name, emptyLine = TRUE)
     for (i in seq(1, length(delay), +1)) {
