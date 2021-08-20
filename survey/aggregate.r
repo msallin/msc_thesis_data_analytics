@@ -113,7 +113,6 @@ aggregated_daily_and_weekly_data <- function(daily, weekly) {
 }
 
 recode_daily_delay_factor_to_mean <- function(x) {
-   return(unlist(x))
    unlist(lapply(x, function(x) {
       if(x == "0") return(0) #0h
       if(x == "1") return(1) #Up to 2h (0+2 /2)
@@ -121,8 +120,8 @@ recode_daily_delay_factor_to_mean <- function(x) {
       if(x == "3") return(6) # ...8h (4+8 / 2)
       if(x == "4") return(16.6) # ...few days (8+25.2 / 2)
       if(x == "5") return(29.3) # ...week (16.6+32 / 2)
-      if(x == "5") return(98.65) # ...month (29.3+168 / 2)
-      if(x == "6") return(295.95) # ...multiple months (98.65*3)
+      if(x == "6") return(98.65) # ...month (29.3+168 / 2)
+      if(x == "7") return(295.95) # ...multiple months (98.65*3)
    }))
 }
 
