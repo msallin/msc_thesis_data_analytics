@@ -93,6 +93,12 @@ generate_descriptive_statistics <- function(daily, weekly) {
 
     writeLine("Customer", full_name, emptyLine=TRUE)
     answers_only <- table(daily[daily[,"customer"]>0,]$customer)
+    all <- sum(answers_only)
+    for (i in 1:length(answers_only)) {
+        percentage <- (answers_only[i]/all)*100
+        writeLine("  " %&% i %&% ": " %&% round(percentage, 1), full_name)
+    }
+
     names = c("Completely insecure", "Somewhat insecure", "Neutral", "Somewhat confident", "Completely confident")
     plot_to_file_start("rq_0_customer")
     par(mar=c(4,10,20,5)) # bottom, left, top, right
