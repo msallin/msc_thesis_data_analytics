@@ -34,9 +34,9 @@ bland_altman_analysis <- function(measurements, title, file) {
    stats <- bland.altman.stats(A, B, conf.int = 0.95)
 
    writeLine(title, file, emptyLine = TRUE)
-   writeLine("Mean diff: " %&%stats$mean.diffs, file)
-   writeLine("Lower limit: " %&% stats$lower.limit, file)
-   writeLine("Upper limit: " %&%stats$upper.limit, file)
+   writeLine("Mean diff: " %&% round(stats$mean.diffs, 1), file)
+   writeLine("Lower limit: " %&% round(stats$lower.limit, 1), file)
+   writeLine("Upper limit: " %&% round(stats$upper.limit, 1), file)
 
    # If missing data points should be drawn in a different color, create own graphic:
    # https://mran.microsoft.com/snapshot/2014-10-25/web/packages/BlandAltmanLeh/vignettes/Intro.html
@@ -49,7 +49,7 @@ bland_altman_analysis <- function(measurements, title, file) {
    fit <- lm(B ~ A, data = df)
    fit_summary <- summary(fit)
    slope_p_value <- fit_summary$coef[,"Pr(>|t|)"][2]
-   writeLine("Slope p-value: " %&% slope_p_value, file)
+   writeLine("Slope p-value: " %&% round(slope_p_value, 5), file)
 
    abline(coef(fit)[1], coef(fit)[2], col="red")
 }

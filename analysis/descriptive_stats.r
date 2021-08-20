@@ -41,18 +41,18 @@ generate_descriptive_statistics <- function(daily, weekly) {
 
     writeLine("5. How stressful is the work environment?", full_name, emptyLine = TRUE)
     stress <- daily[, c("stress")]
-    writeLine("  Mean: " %&% mean(stress), full_name)
-    writeLine("  Median: " %&% median(stress), full_name)
-    writeLine("  Sd: " %&% sd(stress), full_name)
-    writeLine("  Min: " %&% min(stress), full_name)
-    writeLine("  Max: " %&% max(stress), full_name)
+    writeLine("  Mean: " %&% round(mean(stress), 1), full_name)
+    writeLine("  Median: " %&% round(median(stress), 1), full_name)
+    writeLine("  Sd: " %&% round(sd(stress), 1), full_name)
+    writeLine("  Min: " %&% round(min(stress), 1), full_name)
+    writeLine("  Max: " %&% round(max(stress), 1), full_name)
 
     writeLine("6. What was the subjective productivitiy feeling?", full_name, emptyLine = TRUE)
     productivity <- daily[, c("productivity")]
-    writeLine("  Mean: " %&% mean(productivity), full_name)
-    writeLine("  Sd: " %&% sd(productivity), full_name)
-    writeLine("  Min: " %&% min(productivity), full_name)
-    writeLine("  Max: " %&% max(productivity), full_name)
+    writeLine("  Mean: " %&% round(mean(productivity), 1), full_name)
+    writeLine("  Sd: " %&% round(sd(productivity), 1), full_name)
+    writeLine("  Min: " %&% round(min(productivity), 1), full_name)
+    writeLine("  Max: " %&% round(max(productivity), 1), full_name)
 
     writeLine("7. What caused the most stress?", full_name, emptyLine = TRUE)
     stress_causes_subset <- subset(daily, (!is.na(daily$stress_cause) & daily$stress_cause != "<NA>") & daily$stress_cause != "-")
