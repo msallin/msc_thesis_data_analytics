@@ -87,7 +87,7 @@ print_weekly_daily_difference_overview <- function(results, column_names) {
       las = 2
    )
 
-   abline(h = 0, col = "red", lwd = 0.5, lty = 2)
+   abline(h = 0, col = "black", lwd = 0.5, lty = 2)
 
    plot_to_file_end()
 }
