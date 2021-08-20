@@ -20,7 +20,6 @@ generate_daily_weekly_correlation <- function(aggregated_data) {
       names(one_type)[1] <- "weekly"
       names(one_type)[2] <- "daily"
       names(one_type)[3] <- "missing_data"
-      # one_type$daily = log(one_type$daily)
       plot <- ggscatter(
          one_type,
          x = "weekly", y = "daily", conf.int = TRUE,
