@@ -29,6 +29,8 @@ generate_descriptive_statistics <- function(daily, weekly) {
         txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% "(" %&% sum_time_spent[i] %&% " " %&% fraction %&% "%)"
         writeLine(txt, full_name)
     }
+    writeLine("  Statistical significant group differences", full_name, emptyLine = TRUE)
+    check_group_difference(time_spent, full_name)
 
     delay <- daily[, c(get_waste_delay_data_column_names())]
     delay$administrative_demands_delay <- recode_daily_delay_factor_to_mean(delay$administrative_demands_delay)
@@ -37,9 +39,11 @@ generate_descriptive_statistics <- function(daily, weekly) {
 
     writeLine("4. Which was the category with the most delay?", full_name, emptyLine = TRUE)
     for (i in seq(1, length(delay), +1)) {
-        txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% " (" %&% sum_time_spent[i] %&% ")"
+        txt <- "  " %&% i %&% ". " %&% labels(sum_delay[i]) %&% " (" %&% sum_delay[i] %&% ")"
         writeLine(txt, full_name)
     }
+    writeLine("  Statistical significant group differences", full_name, emptyLine = TRUE)
+    check_group_difference(delay, full_name)
 
     writeLine("5. How stressful is the work environment?", full_name, emptyLine = TRUE)
     stress <- daily[, c("stress")]
@@ -104,6 +108,24 @@ generate_descriptive_statistics <- function(daily, weekly) {
     nevery_missed_weekly <- setdiff(without_missing, with_missing)
     writeLine("Candidates (with missing): " %&% length(with_missing), full_name)
     writeLine("Candidates (without missing): " %&% length(nevery_missed_weekly), full_name)
+}
+
+check_group_difference <- function(groups, file) {
+    combinations <- list()
+    if(length(names(groups)) > 2) {
+        combinations <- combn(names(groups), 2, simplify=FALSE)
+    } else {
+        combinations <- list(names(groups))
+    }
+    
+    for (i in 1:length(combinations)) {
+       name1 <- combinations[[i]][1]
+       name2 <- combinations[[i]][2]
+       result <- wilcox.test(groups[,name1], groups[,name2])
+       if(result$p.value < 0.05) {
+           writeLine("   " %&% name1 %&% " & " %&% name2 %&% " (p=" %&% round(result$p.value, 5) %&% ")", file)
+       }
+    }
 }
 
 word_frequency <- function(input) {
