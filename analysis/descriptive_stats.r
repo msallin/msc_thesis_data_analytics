@@ -95,8 +95,8 @@ generate_descriptive_statistics <- function(daily, weekly) {
     answers_only <- table(daily[daily[,"customer"]>0,]$customer)
     names = c("Completely insecure", "Somewhat insecure", "Neutral", "Somewhat confident", "Completely confident")
     plot_to_file_start("rq_0_customer")
-    par(mar=c(2,10,20,2))
-    barplot(answers_only, names.arg=names, horiz=T, las=1)
+    par(mar=c(4,10,20,5)) # bottom, left, top, right
+    barplot(answers_only, names.arg=names, horiz=T, las=1, xlab="Frequency", xlim=range(pretty(c(0,answers_only))))
     plot_to_file_end()
 
     writeLine("9. How many weekly data points have missing daily survey?", full_name, emptyLine = TRUE)
