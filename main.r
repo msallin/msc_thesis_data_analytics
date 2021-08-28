@@ -18,12 +18,11 @@ source("survey/daily_survey.r")
 source("survey/weekly_survey.r")
 source("survey/load_all.r")
 source("survey/aggregate.r")
-source("analysis/pre_processing.r")
-source("analysis/descriptive_stats.r")
-source("analysis/rq21_tool_feedback.r")
-source("analysis/rq22_accuracy.r")
-source("analysis/rq23_bias.r")
-source("analysis/rq3_fkm_waste.r")
+source("analysis/0_pre_processing.r")
+source("analysis/rq2_tool_feedback.r")
+source("analysis/rq3_descriptive_stats.r")
+source("analysis/rq4_accuracy_bias.r")
+source("analysis/rq5_fkm_waste.r")
 
 # Load all the data from excel. This will populate some global variables:
 # daily, weekly, fkm, final, tool_feedback
@@ -37,15 +36,17 @@ weekly <- find_missing_reportings(daily, weekly, final)
 # Combine the available data into one data set for further processing
 aggregated_data <- aggregated_daily_and_weekly_data(daily, weekly)
 
-# Descriptive Stats
-generate_descriptive_statistics(daily, weekly)
-
 # RQ2
-generate_feedback_likert_plots(tool_feedback) # 2.1
-generate_not_reported_waste_summary(daily) # 2.1
-generate_daily_weekly_correlation(aggregated_data) # 2.2
-generate_daily_weekly_difference_boxplots(aggregated_data) # 2.2
-generate_daily_weekly_bias(aggregated_data) # 2.3
+generate_feedback_likert_plots(tool_feedback)
+generate_not_reported_waste_summary(daily)
 
 # RQ3
+generate_descriptive_statistics(daily, weekly)
+
+# RQ4
+generate_daily_weekly_correlation(aggregated_data)
+generate_daily_weekly_difference_boxplots(aggregated_data)
+generate_daily_weekly_bias(aggregated_data)
+
+# RQ5
 generate_regression_fkm_waste(daily, fkm)

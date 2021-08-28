@@ -1,5 +1,5 @@
 # ***********************************************************
-# RQ2.1: How can a self-reporting tool help to identify waste?
+# RQ2: How can a software development team identify and quantify waste by using a self-reporting mechanism?
 # ***********************************************************
 # This script generates plots to visualize (and interpret) the answers
 # to the likert questions for evaluating the tool.
@@ -38,13 +38,13 @@ generate_feedback_likert_plots <- function(tool_feedback) {
     p$layers[[2]]$geom_params$width = 0.8
     p$layers[[3]]$geom_params$width = 0.8
     p <- p + theme(plot.margin=grid::unit(c(0,0,0,0), "mm"), aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
-    suppressMessages(ggsave(plot = p, "results/rq_2_1_likert_one.pdf", device = "pdf", height = 2.3, width = 11))
+    suppressMessages(ggsave(plot = p, "results/rq2_likert_one.pdf", device = "pdf", height = 2.3, width = 11))
 
     p <- plot(likert(likert_two_full_text), wrap=40, text.size=2.5)
     p$layers[[2]]$geom_params$width = 0.8
     p$layers[[3]]$geom_params$width = 0.8
     p <- p + theme(plot.margin=grid::unit(c(0,0,0,0), "mm"), aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
-    suppressMessages(ggsave(plot = p, "results/rq_2_1_likert_two.pdf", device = "pdf", height = 4, width = 11))
+    suppressMessages(ggsave(plot = p, "results/rq2_likert_two.pdf", device = "pdf", height = 4, width = 11))
 }
 
 generate_not_reported_waste_summary <- function(daily) {
@@ -56,7 +56,7 @@ generate_not_reported_waste_summary <- function(daily) {
         daily$not_reported != "no")
     reports_with_content <- reports_with_content$not_reported
 
-    file_name <- "rq_2_1_not_able_to_report.txt"
+    file_name <- "rq2_not_able_to_report.txt"
     full_name <- recreate_results_file(file_name)
     writeLine("Participants not able to report the following waste:", full_name)
     writeLine(reports_with_content, full_name)

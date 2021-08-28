@@ -1,5 +1,5 @@
 # ***********************************************************
-# Descriptive Statistics
+# RQ3: What are the insights for Swiss Post?
 # ***********************************************************
 # This script generates a bunch of descriptive statistics based on the reported daily & weekly data.
 # 1. Daily answers
@@ -14,7 +14,7 @@
 # ***********************************************************
 
 generate_descriptive_statistics <- function(daily, weekly) {
-    file_name <- "rq_0_descriptive.txt"
+    file_name <- "rq3_descriptive.txt"
     full_name <- recreate_results_file(file_name)
 
     writeLine("1. Number of daily reports: " %&% nrow(daily), full_name)
@@ -100,7 +100,7 @@ generate_descriptive_statistics <- function(daily, weekly) {
     }
 
     names = c("Completely insecure", "Somewhat insecure", "Neutral", "Somewhat confident", "Completely confident")
-    plot_to_file_start("rq_0_customer")
+    plot_to_file_start("rq3_customer")
     par(mar=c(4,10,20,5)) # bottom, left, top, right
     barplot(answers_only, names.arg=names, horiz=T, las=1, xlab="Frequency", xlim=range(pretty(c(0,answers_only))))
     plot_to_file_end()

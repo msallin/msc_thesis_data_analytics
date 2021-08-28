@@ -1,5 +1,5 @@
 # ***********************************************************
-# RQ3: Is the reported amount of waste correlated with the software delivery performance?
+# RQ5: Is the reported amount of waste correlated with the software delivery performance?
 # ***********************************************************
 # This script does calculate the total reported waste per quantification unit
 # And performs a correlation analysis (using spearman, visual and fitting lm)
@@ -28,7 +28,7 @@ generate_regression_fkm_waste <- function(daily, fkm) {
     correlation_plots[["Productivity"]] <- fit_lm(filtered_fkm, aggregated_customer, "Customer")
 
     arranged_plot <- ggarrange(plotlist = correlation_plots)
-    suppressMessages(ggsave(plot = arranged_plot, "results/rq_3_fkm_waste_correlation.pdf", device = "pdf"))
+    suppressMessages(ggsave(plot = arranged_plot, "results/rq5_fkm_waste_correlation.pdf", device = "pdf"))
 }
 
 fit_lm <- function(fkm, waste, title) {
