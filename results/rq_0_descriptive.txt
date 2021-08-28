@@ -98,6 +98,11 @@ infrastructure_woes 1
 instable_cicd_pipeline 1
 
 Customer
+  1: 2.8
+  2: 4.7
+  3: 21.9
+  4: 44.2
+  5: 26.5
 
 9. How many weekly data points have missing daily survey?
 Missing data (#weeks): 15
