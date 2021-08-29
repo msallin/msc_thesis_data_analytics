@@ -38,8 +38,10 @@ generate_descriptive_statistics <- function(daily, weekly) {
     sum_delay <- sort(colSums(delay[, 1:length(delay)]), decreasing = TRUE)
 
     writeLine("4. Which was the category with the most delay?", full_name, emptyLine = TRUE)
+    total_sum_delay <- sum(sum_delay)
     for (i in seq(1, length(delay), +1)) {
-        txt <- "  " %&% i %&% ". " %&% labels(sum_delay[i]) %&% " (" %&% sum_delay[i] %&% ")"
+        fraction <- round((sum_delay[i] / total_sum_delay) * 100, 2)
+        txt <- "  " %&% i %&% ". " %&% labels(sum_delay[i]) %&% " (" %&% sum_delay[i] %&% " " %&% fraction %&% "%)"
         writeLine(txt, full_name)
     }
     writeLine("  Statistical significant group differences", full_name, emptyLine = TRUE)

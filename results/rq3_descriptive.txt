@@ -26,8 +26,8 @@
    complex_solution & knowledge (p=0.03242)
 
 4. Which was the category with the most delay?
-  1. administrative_demands_delay (822.6)
-  2. missing_automation_delay (152.1)
+  1. administrative_demands_delay (822.6 84.4%)
+  2. missing_automation_delay (152.1 15.6%)
 
   Statistical significant group differences
 
