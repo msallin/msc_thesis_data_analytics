@@ -13,10 +13,10 @@ generate_feedback_likert_plots <- function(tool_feedback) {
     )
 
     likert_two_columns <- c(
-        "day_was_more_accurate",
-        "daily_had_influence_on_weekly",
         "fill_out_daily_okay",
-        "fill_out_weekly_okay"
+        "fill_out_weekly_okay",
+        "day_was_more_accurate",
+        "daily_had_influence_on_weekly"
     )
 
     likert_one_full_text <- tool_feedback[, likert_one_columns]
@@ -28,19 +28,19 @@ generate_feedback_likert_plots <- function(tool_feedback) {
 
     likert_two_full_text <- tool_feedback[, likert_two_columns]
     names(likert_two_full_text) <- c(
-        "day_was_more_accurate" = "My daily reporting was more accurate than my weekly reporting",
-        "daily_had_influence_on_weekly" = "What I reported in my daily surveys influenced what I reported in my weekly surveys",
         "fill_out_daily_okay" = "If I'm asked to, I would fill out a daily survey for waste identification for a few weeks every year",
-        "fill_out_weekly_okay" = "If I'm asked to, I would fill out a weekly survey for waste identification for a few weeks every year"
+        "fill_out_weekly_okay" = "If I'm asked to, I would fill out a weekly survey for waste identification for a few weeks every year",
+        "day_was_more_accurate" = "My daily reporting was more accurate than my weekly reporting",
+        "daily_had_influence_on_weekly" = "What I reported in my daily surveys influenced what I reported in my weekly surveys"
     )
 
-    p <- plot(likert(likert_one_full_text), wrap=40, text.size=2.5)
+    p <- plot(likert(likert_one_full_text), wrap=40, text.size=2.5, ordered=FALSE,  group.order=names(likert_one_full_text))
     p$layers[[2]]$geom_params$width = 0.8
     p$layers[[3]]$geom_params$width = 0.8
     p <- p + theme(plot.margin=grid::unit(c(0,0,0,0), "mm"), aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
     suppressMessages(ggsave(plot = p, "results/rq2_likert_one.pdf", device = "pdf", height = 2.3, width = 11))
 
-    p <- plot(likert(likert_two_full_text), wrap=40, text.size=2.5)
+    p <- plot(likert(likert_two_full_text), wrap=40, text.size=2.5, ordered=FALSE, group.order=names(likert_two_full_text))
     p$layers[[2]]$geom_params$width = 0.8
     p$layers[[3]]$geom_params$width = 0.8
     p <- p + theme(plot.margin=grid::unit(c(0,0,0,0), "mm"), aspect.ratio=0.2, legend.text = element_text(color="black",size=8), axis.text=element_text(color="black",size=8))
