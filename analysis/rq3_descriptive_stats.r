@@ -21,6 +21,12 @@ generate_descriptive_statistics <- function(daily, weekly) {
     writeLine("2. Number of weekly reports: " %&% nrow(weekly), full_name, emptyLine = TRUE)
 
     time_spent <- daily[, c(get_waste_time_spent_column_names())]
+
+    # Recode to hours
+    for (name in get_waste_time_spent_column_names()) {
+        time_spent[,name] <- recode_daily_factor_to_mean(time_spent[,name])
+    }
+
     sum_time_spent <- sort(colSums(time_spent[, 1:length(time_spent)]), decreasing = TRUE)
     total_sum_time_spent <- sum(time_spent)
     writeLine("3. Which was the category with the most waste?", full_name, emptyLine = TRUE)
