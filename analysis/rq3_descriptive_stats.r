@@ -31,16 +31,19 @@ generate_descriptive_statistics <- function(daily, weekly) {
     total_sum_time_spent <- sum(time_spent)
     writeLine("3. Which was the category with the most waste?", full_name, emptyLine = TRUE)
     for (i in seq(1, length(time_spent), +1)) {
+        daily_avg_min <- round(sum_time_spent[i] / nrow(time_spent) * 60, 0)
         fraction <- round((sum_time_spent[i] / total_sum_time_spent) * 100, 2)
-        txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% "(" %&% sum_time_spent[i] %&% " " %&% fraction %&% "%)"
+        txt <- "  " %&% i %&% ". " %&% labels(sum_time_spent[i]) %&% " (" %&% sum_time_spent[i] %&% "h " %&% fraction %&% "%)" %&% " daily: " %&% daily_avg_min %&% "min "
         writeLine(txt, full_name)
     }
+    writeLine("  Total: " %&% total_sum_time_spent %&% "h", full_name, emptyLine = TRUE)
     writeLine("  Statistical significant group differences", full_name, emptyLine = TRUE)
     check_group_difference(time_spent, full_name)
 
     delay <- daily[, c(get_waste_delay_data_column_names())]
-    delay$administrative_demands_delay <- recode_daily_delay_factor_to_mean(delay$administrative_demands_delay)
-    delay$missing_automation_delay <- recode_daily_delay_factor_to_mean(delay$missing_automation_delay)
+    for (name in get_waste_delay_data_column_names()) {
+        delay[,name] <- recode_daily_delay_factor_to_mean(delay[,name])
+    }
     sum_delay <- sort(colSums(delay[, 1:length(delay)]), decreasing = TRUE)
 
     writeLine("4. Which was the category with the most delay?", full_name, emptyLine = TRUE)
@@ -50,6 +53,7 @@ generate_descriptive_statistics <- function(daily, weekly) {
         txt <- "  " %&% i %&% ". " %&% labels(sum_delay[i]) %&% " (" %&% sum_delay[i] %&% " " %&% fraction %&% "%)"
         writeLine(txt, full_name)
     }
+    writeLine("  Total: " %&% total_sum_delay %&% "h", full_name, emptyLine = TRUE)
     writeLine("  Statistical significant group differences", full_name, emptyLine = TRUE)
     check_group_difference(delay, full_name)
 
