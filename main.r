@@ -50,3 +50,6 @@ generate_daily_weekly_bias(aggregated_data)
 
 # RQ5
 generate_regression_fkm_waste(daily, fkm)
+
+# Participant Reports
+generate_participant_reports(aggregated_data)
