@@ -16,6 +16,9 @@ generate_regression_fkm_waste <- function(daily, fkm) {
     correlation_plots[["Delay"]] <- fit_lm(filtered_fkm, aggregated_delay, "Delay")
 
     time_spent_columns <- daily[, c("id", get_waste_time_spent_column_names())]
+    for (identifier in get_waste_time_spent_column_names()) {
+       time_spent_columns[,identifier] <- recode_daily_factor_to_mean(time_spent_columns[,identifier])
+    }
     aggregated_time_spent <- aggregate(. ~ id, time_spent_columns, mean)
     correlation_plots[["Time Spent"]] <- fit_lm(filtered_fkm, aggregated_time_spent, "Time Spent")
 
@@ -37,7 +40,6 @@ fit_lm <- function(fkm, waste, title) {
         conf.int = TRUE, title = title, size=1) +
         geom_smooth(formula = y ~ x, method = "lm", colour = "blue", size = 0.5) +
         stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")), label.x = 10) # Show R^2 of lm fit instead of rho
-        # stat_cor(method = "pearson", cor.coef.name = "rho") # Show rho of pearson correlation
     return(plot)
 }
 
