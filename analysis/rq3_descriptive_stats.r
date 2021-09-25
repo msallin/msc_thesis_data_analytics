@@ -49,8 +49,9 @@ generate_descriptive_statistics <- function(daily, weekly) {
     writeLine("4. Which was the category with the most delay?", full_name, emptyLine = TRUE)
     total_sum_delay <- sum(sum_delay)
     for (i in seq(1, length(delay), +1)) {
+        daily_avg_min <- round(total_sum_delay[i] / nrow(delay) * 60, 0)
         fraction <- round((sum_delay[i] / total_sum_delay) * 100, 2)
-        txt <- "  " %&% i %&% ". " %&% labels(sum_delay[i]) %&% " (" %&% sum_delay[i] %&% " " %&% fraction %&% "%)"
+        txt <- "  " %&% i %&% ". " %&% labels(sum_delay[i]) %&% " (" %&% sum_delay[i] %&% "h " %&% fraction %&% "%)" %&% " daily: " %&% daily_avg_min %&% "min "
         writeLine(txt, full_name)
     }
     writeLine("  Total: " %&% total_sum_delay %&% "h", full_name, emptyLine = TRUE)
