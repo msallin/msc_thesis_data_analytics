@@ -3,14 +3,16 @@
 2. Number of weekly reports: 42
 
 3. Which was the category with the most waste?
-  1. rework(246 17.61%)
-  2. other_duties(191 13.67%)
-  3. knowledge(178 12.74%)
-  4. administrative_demands(172 12.31%)
-  5. cognitive_load(165 11.81%)
-  6. manual(157 11.24%)
-  7. communication(157 11.24%)
-  8. complex_solution(131 9.38%)
+  1. rework (217h 20.31%) daily: 57min 
+  2. other_duties (157h 14.69%) daily: 41min 
+  3. knowledge (144h 13.48%) daily: 38min 
+  4. cognitive_load (124h 11.61%) daily: 32min 
+  5. communication (113.5h 10.62%) daily: 30min 
+  6. administrative_demands (112h 10.48%) daily: 29min 
+  7. manual (100.5h 9.41%) daily: 26min 
+  8. complex_solution (100.5h 9.41%) daily: 26min 
+
+  Total: 1068.5h
 
   Statistical significant group differences
    rework & manual (p=0.01179)
@@ -26,8 +28,10 @@
    complex_solution & knowledge (p=0.03242)
 
 4. Which was the category with the most delay?
-  1. administrative_demands_delay (822.6 84.4%)
-  2. missing_automation_delay (152.1 15.6%)
+  1. administrative_demands_delay (822.6h 84.4%) daily: 255min 
+  2. missing_automation_delay (152.1h 15.6%) daily: NAmin 
+
+  Total: 974.7h
 
   Statistical significant group differences
 
