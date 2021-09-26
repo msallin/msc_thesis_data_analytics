@@ -23,6 +23,7 @@ source("analysis/rq2_tool_feedback.r")
 source("analysis/rq3_descriptive_stats.r")
 source("analysis/rq4_accuracy_bias.r")
 source("analysis/rq5_fkm_waste.r")
+source("analysis/rq6_participant_report.r")
 
 # Load all the data from excel. This will populate some global variables:
 # daily, weekly, fkm, final, tool_feedback
