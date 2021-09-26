@@ -72,16 +72,3 @@ generate_participant_reports <- function(aggregated_data) {
         writeLine(paste(c("| Customer confidence mean weekly", participant$weekly_customer), collapse = " | ") %&% " | ", full_name)
     }
 }
-
-format_time_span <- function(time_in_min) {
-    if(is.na(time_in_min)) {
-        return("-")
-    }
-    if(time_in_min > 59) {
-        result <- round(time_in_min/60, 1) %&% "h"
-        return(result)
-    } else {
-        result <- time_in_min %&% "min"
-        return(result)
-    }
-}

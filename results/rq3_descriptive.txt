@@ -1,16 +1,18 @@
-1. Number of daily reports: 229
+1. Survey stats
+  Candidates (with missing): 12
+  Candidates (without missing): 6
+  Number of daily reports: 229
+  Number of weekly reports: 42
 
-2. Number of weekly reports: 42
-
-3. Which was the category with the most waste?
-  1. rework (217h 20.31%) daily: 57min 
-  2. other_duties (157h 14.69%) daily: 41min 
-  3. knowledge (144h 13.48%) daily: 38min 
-  4. cognitive_load (124h 11.61%) daily: 32min 
-  5. communication (113.5h 10.62%) daily: 30min 
-  6. administrative_demands (112h 10.48%) daily: 29min 
-  7. manual (100.5h 9.41%) daily: 26min 
-  8. complex_solution (100.5h 9.41%) daily: 26min 
+2. Which was the category with the most waste?
+  1. Rework 20.31% (217h, 57min/day)
+  2. Other Duties 14.69% (157h, 41min/day)
+  3. Knowledge 13.48% (144h, 38min/day)
+  4. Cognitive Load 11.61% (124h, 32min/day)
+  5. Communication 10.62% (113.5h, 30min/day)
+  6. Admin Demands 10.48% (112h, 29min/day)
+  7. Manual Work 9.41% (100.5h, 26min/day)
+  8. Complex Solution 9.41% (100.5h, 26min/day)
 
   Total: 1068.5h
 
@@ -27,89 +29,87 @@
    cognitive_load & complex_solution (p=0.03034)
    complex_solution & knowledge (p=0.03242)
 
-4. Which was the category with the most delay?
-  1. administrative_demands_delay (822.6h 84.4%) daily: 255min 
-  2. missing_automation_delay (152.1h 15.6%) daily: NAmin 
+3. Which was the category with the most delay?
+  1. Admin Demands Delay 84.4% (822.6h, 3.6h/day)
+  2. Automation Delay 15.6% (152.1h, 40min/day)
 
   Total: 974.7h
 
   Statistical significant group differences
 
-5. How stressful is the work environment?
+4. How stressful is the work environment?
   Mean: 2.3
   Median: 2
   Sd: 2.3
   Min: 0
   Max: 8
 
-6. What was the subjective productivitiy feeling?
+5. What was the subjective productivitiy feeling?
   Mean: 5.9
   Sd: 2.4
   Min: 0
   Max: 10
 
-7. What caused the most stress?
-meetings 9
-deadline 8
-calls 2
-parallel_tasks 2
-unclear_situation 2
-absent_coworker_answering_analysten_problems_projects 1
-ad_groups 1
-application_errors_pilot_i_right_know_actual_developer_vacation 1
-attending_job_interview_interviewer 1
-being_reliant_opinions 1
-bounce_topics 1
-bugs 1
-colleagues_want_cooperate 1
-conflict_team_members 1
-contect_switch 1
+6. What caused the most stress?
+  meetings 9
+  deadline 8
+  calls 2
+  parallel_tasks 2
+  unclear_situation 2
+  absent_coworker_answering_analysten_problems_projects 1
+  ad_groups 1
+  application_errors_pilot_i_right_know_actual_developer_vacation 1
+  attending_job_interview_interviewer 1
+  being_reliant_opinions 1
+  bounce_topics 1
+  bugs 1
+  colleagues_want_cooperate 1
+  conflict_team_members 1
+  contect_switch 1
 
-8. What caused the most waste?
+7. What caused the most waste?
 
-8.1 Daily?
-meetings 18
-technical_debt 12
-calls 3
-email 3
-unnecessary_reporting 3
-sql_server 2
-unstable_pipeline 2
-absent_coworker_fixing_bugs 1
-access_info_missing_grant_jira_project_waste 1
-adapt_multiple_repo 1
-answering_stupid_questions 1
-answering_writing_stupid_mails 1
-artifact_cleanup 1
-bad_programming_language 1
-billing 1
+7.1 Daily?
+  meetings 18
+  technical_debt 12
+  calls 3
+  email 3
+  unnecessary_reporting 3
+  sql_server 2
+  unstable_pipeline 2
+  absent_coworker_fixing_bugs 1
+  access_info_missing_grant_jira_project_waste 1
+  adapt_multiple_repo 1
+  answering_stupid_questions 1
+  answering_writing_stupid_mails 1
+  artifact_cleanup 1
+  bad_programming_language 1
+  billing 1
 
-8.2 Weekly?
-meetings 3
-bug_fixing 2
-admin 1
-asking_around_informations_documented 1
-broken_poorly_documented_third_party_tools 1
-budget_fail 1
-calls 1
-chats 1
-communication 1
-contexswitch 1
-debug_th_party_code 1
-deputy_tasks 1
-explaining_things_th_time 1
-infrastructure_woes 1
-instable_cicd_pipeline 1
+7.2 Weekly?
+  meetings 3
+  bug_fixing 2
+  admin 1
+  asking_around_informations_documented 1
+  broken_poorly_documented_third_party_tools 1
+  budget_fail 1
+  calls 1
+  chats 1
+  communication 1
+  contexswitch 1
+  debug_th_party_code 1
+  deputy_tasks 1
+  explaining_things_th_time 1
+  infrastructure_woes 1
+  instable_cicd_pipeline 1
 
-Customer
+8. How many weekly data points have missing daily survey?
+  Missing data (#weeks): 15
+  Total (#weeks): 42
+
+9. Customer
   1: 2.8
   2: 4.7
   3: 21.9
   4: 44.2
   5: 26.5
-
-9. How many weekly data points have missing daily survey?
-Missing data (#weeks): 15
-Total (#weeks): 42
-Candidates (with missing): 12
-Candidates (without missing): 6
