@@ -21,7 +21,7 @@ aggregated_daily_and_weekly_data <- function(daily, weekly) {
          
          daily_stress <- mean(daily_participant$stress)
          daily_productivity <- mean(daily_participant$productivity)
-         
+
          # The factors used represent timespans and hence calculating the mean is possible.
          # It is the same as taking the mean amount of hours represented in a span, sum and average this.
          daily_rework <- sum(recode_daily_factor_to_mean(daily_participant$rework))
@@ -103,7 +103,8 @@ aggregated_daily_and_weekly_data <- function(daily, weekly) {
             weekly_knowledge,
             weekly_time_waste,
             weekly_time_delay,
-            missing_data
+            missing_data,
+            number_of_days_reported
          )
          week_aggreations <- rbind(week_aggreations, week_aggreations_row)
       }

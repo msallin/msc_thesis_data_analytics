@@ -115,9 +115,11 @@ generate_descriptive_statistics <- function(daily, weekly) {
     answers_only <- table(daily[daily[,"customer"]>0,]$customer)
     all <- sum(answers_only)
     for (i in 1:length(answers_only)) {
-        percentage <- (answers_only[i]/all)*100
+        percentage <- (answers_only[i]/all) * 100
         writeLine("  " %&% i %&% ": " %&% round(percentage, 1), full_name)
     }
+    customer_records <- daily[daily[,"customer"]>0,]$customer
+    writeLine("  Mean: " %&% round(mean(customer_records), 1) %&% "; Median: " %&% round(median(customer_records), 1) %&% "; Standard deviation: " %&% round(sd(customer_records), 1), full_name)
 
     names = c("Completely insecure", "Somewhat insecure", "Neutral", "Somewhat confident", "Completely confident")
     plot_to_file_start("rq3_customer")

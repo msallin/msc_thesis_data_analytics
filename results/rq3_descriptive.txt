@@ -113,3 +113,4 @@
   3: 21.9
   4: 44.2
   5: 26.5
+  Mean: 3.9; Median: 4; Standard deviation: 1
