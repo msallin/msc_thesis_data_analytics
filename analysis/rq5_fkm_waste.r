@@ -12,6 +12,9 @@ generate_regression_fkm_waste <- function(daily, fkm) {
     correlation_plots <- list()
 
     delay_columns <- daily[, c("id", get_waste_delay_data_column_names())]
+    for (identifier in get_waste_delay_data_column_names()) {
+       delay_columns[,identifier] <- recode_daily_delay_factor_to_mean(delay_columns[,identifier])
+    }
     aggregated_delay <- aggregate(. ~ id, delay_columns, mean)
     correlation_plots[["Delay"]] <- fit_lm(filtered_fkm, aggregated_delay, "Delay")
 
@@ -27,25 +30,59 @@ generate_regression_fkm_waste <- function(daily, fkm) {
     correlation_plots[["Stress"]] <- fit_lm(filtered_fkm, aggregated_stress, "Stress")
 
     customer_column <- daily[, c("id", "customer")]
+    customer_column <- daily[which(daily$customer != 0), c("id", "customer")]
     aggregated_customer <- aggregate(. ~ id, customer_column, mean)
     correlation_plots[["Productivity"]] <- fit_lm(filtered_fkm, aggregated_customer, "Customer")
 
     arranged_plot <- ggarrange(plotlist = correlation_plots)
     suppressMessages(ggsave(plot = arranged_plot, "results/rq5_fkm_waste_correlation.pdf", device = "pdf"))
+
+    rq5_fkm_time_spent_levels(filtered_fkm)
+    rq5_fkm_time_spent_hours(filtered_fkm)
+}
+
+rq5_fkm_time_spent_levels <- function(filtered_fkm) {
+    time_spent_correlation_plots <- list()
+    for (identifier in get_waste_time_spent_column_names()) {
+        one_category <- daily[, c("id", identifier)]
+        one_category_aggregate <- aggregate(. ~ id, one_category, mean)
+        time_spent_correlation_plots[[identifier]] <- fit_lm(filtered_fkm, one_category_aggregate, identifier)
+    }
+    arranged_plot <- ggarrange(plotlist = time_spent_correlation_plots)
+    suppressMessages(ggsave(plot = arranged_plot, "results/rq5_fkm_time_spent_levels.pdf", device = "pdf"))
+}
+
+rq5_fkm_time_spent_hours <- function(filtered_fkm) {
+    time_spent_correlation_plots <- list()
+    for (identifier in get_waste_time_spent_column_names()) {
+        one_category <- daily[, c("id", identifier)]
+        one_category[,identifier] <- recode_daily_factor_to_mean(one_category[,identifier])
+        one_category_aggregate <- aggregate(. ~ id, one_category, mean)
+        time_spent_correlation_plots[[identifier]] <- fit_lm(filtered_fkm, one_category_aggregate, identifier)
+    }
+    arranged_plot <- ggarrange(plotlist = time_spent_correlation_plots)
+    suppressMessages(ggsave(plot = arranged_plot, "results/rq5_fkm_time_spent_hours.pdf", device = "pdf"))
 }
 
 fit_lm <- function(fkm, waste, title) {
     lm_data_frame <- prepare_data(fkm, waste)
-    plot <- ggscatter(lm_data_frame, x = "score", y = "total",
-        conf.int = TRUE, title = title, size=1) +
-        geom_smooth(formula = y ~ x, method = "lm", colour = "blue", size = 0.5) +
-        stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")), label.x = 10) # Show R^2 of lm fit instead of rho
+    if(title == "Delay") {
+        lm_data_frame <- lm_data_frame[which(lm_data_frame$total < 40),]
+    }
+    else if(title == "Time Spent") {
+         lm_data_frame["total"][lm_data_frame["total"] > 9] <- 8
+    }
+
+    plot <- ggscatter(lm_data_frame, x = "total", y = "score", xlab = "Mean Daily Waste", ylab = "FKM Score",
+        conf.int = FALSE, title = title, size=1) +
+        geom_smooth(formula = y ~ x, method = "lm", colour = "blue", size = 0.3, se = FALSE) +
+        stat_cor(method = "spearman", cor.coef.name = "rho", label.x.npc = "left",  label.y.npc = "top") # Show rho of pearson correlation
     return(plot)
 }
 
 prepare_data <- function(fkm, waste) {
     fkm_waste <- merge(fkm, waste, by = "id")
-    
+
     total <- 0
     # If there is only one column, now rowSum is necessary but only select the column
     if(length(fkm_waste) == 7) {

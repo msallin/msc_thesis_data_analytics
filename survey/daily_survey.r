@@ -63,11 +63,11 @@ get_daily <- function(daily_sheet) {
 
     customer_recode <- c(
         "N/A" = 0,
-        "Completely confident" = 5,
-        "Somewhat confident" = 4,
+        "Completely confident" = 1,
+        "Somewhat confident" = 2,
         "Neutral" = 3,
-        "Somewhat insecure" = 2,
-        "Completely insecure" = 1
+        "Somewhat insecure" = 4,
+        "Completely insecure" = 5
     )
     daily_sheet_new$customer <- customer_recode[daily_sheet_new$customer]
 

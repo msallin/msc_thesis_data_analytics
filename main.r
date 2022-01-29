@@ -37,6 +37,7 @@ weekly <- find_missing_reportings(daily, weekly, final)
 # Combine the available data into one data set for further processing
 aggregated_data <- aggregated_daily_and_weekly_data(daily, weekly)
 
+
 # RQ2
 generate_feedback_likert_plots(tool_feedback)
 generate_not_reported_waste_summary(daily)
@@ -54,3 +55,12 @@ generate_regression_fkm_waste(daily, fkm)
 
 # Participant Reports
 generate_participant_reports(aggregated_data)
+
+# ******** TEMP ******** 
+# Amount of daily reports per participant
+#library(dplyr)
+#a <- daily %>% group_by(id) %>% summarise(count_n = n())
+#mean(a$count_n)
+#sd(a$count_n)
+#hist(a$count_n, breaks=8)
+#ftable(a$count_n)
